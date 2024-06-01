@@ -2,8 +2,6 @@ import { Input } from "antd";
 import { useCallback } from "react";
 import { Handle, Position } from "reactflow";
 
-const handleStyle = { left: 10 };
-
 const PhoneNumber: any = ({ data, isConnectable }: any) => {
   const onChange = useCallback((evt: any) => {
     console.log(evt.target.value);
@@ -31,7 +29,7 @@ const PhoneNumber: any = ({ data, isConnectable }: any) => {
             ></path>
           </svg>
         </div>
-        <div className="soundline-node-label">{data.name}</div>
+        <div className="soundline-node-label">Phone Number</div>
       </div>
       <div className="soundline-node-content">
         <div className="soundline-node-item">
@@ -43,6 +41,13 @@ const PhoneNumber: any = ({ data, isConnectable }: any) => {
           />
         </div>
       </div>
+      <Handle
+        className="soundline-handle-right"
+        type="source"
+        position={Position.Right}
+        id="next"
+        isConnectable={isConnectable}
+      />
     </div>
   );
 };
