@@ -6,8 +6,8 @@ const Header = ({ nodes, edges }: any) => {
     console.log(nodes, edges);
   };
   return (
-    <div className="py-3 px-6 flex items-center justify-between border-b shadow-sm">
-      <div className="w-20 h-5 flex items-center">
+    <div className="py-3 px-6 pl-4 flex items-center justify-between border-b shadow-sm">
+      <div className="w-28 flex items-center">
         <img src={myImage} alt="" />
       </div>
       <div>

@@ -83,15 +83,17 @@ const Conditionals = (props: any) => {
         isVisible={props.data.toolbarVisible}
         position={props.data.toolbarPosition}
         align="end"
-        className="flex gap-1 "
+        className="soundline-tool"
       >
         <Button
+          type="text"
           size="small"
           title="Duplicate"
           icon={<CopyOutlined />}
           onClick={handleDuplicate}
         ></Button>
         <Button
+          type="text"
           size="small"
           title="Delete"
           icon={<DeleteOutlined />}
