@@ -1,32 +1,24 @@
 import { CopyOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
-import { v4 as uuidv4 } from "uuid";
-const Conditionals = (props: any) => {
+import {
+  deleteNode,
+  duplicateNode,
+  onChangeNode,
+} from "../../../../utils/common";
+
+const GoToConditional = (props: any) => {
+  const [form] = Form.useForm();
   const { setNodes } = useReactFlow();
   const onChange = (evt: any) => {
-    setNodes((nds) =>
-      nds.map((node) => {
-        if (node.id === props.id) {
-          node.data = { ...evt };
-          return node;
-        }
-        return node;
-      })
-    );
+    const allFields = form.getFieldsValue();
+    onChangeNode(setNodes, props, allFields);
   };
   const handleDuplicate = () => {
-    const duplicatedNode = {
-      id: uuidv4(),
-      type: props.type,
-      position: { x: props.xPos * 3, y: props.yPos },
-      data: props.data,
-    };
-
-    setNodes((nodes) => [...nodes, duplicatedNode]);
+    duplicateNode(setNodes, props);
   };
   const handleDelete = () => {
-    setNodes((nodes) => nodes.filter((node) => node.id !== props.id));
+    deleteNode(setNodes, props);
   };
   return (
     <div className="soundline-node">
@@ -65,9 +57,10 @@ const Conditionals = (props: any) => {
             </g>
           </svg>
         </div>
-        <div className="soundline-node-label">Conditionals</div>
+        <div className="soundline-node-label">Go To Conditional</div>
       </div>
       <Form
+        form={form}
         className="soundline-node-content"
         onValuesChange={onChange}
         initialValues={props.data}
@@ -101,16 +94,16 @@ const Conditionals = (props: any) => {
         ></Button>
       </NodeToolbar>
       <Handle
-        className="soundline-handle-right"
-        type="source"
-        position={Position.Right}
-        id="next"
+        className="soundline-handle"
+        type="target"
+        position={Position.Top}
+        id="target"
         isConnectable={props.isConnectable}
       />
       <Handle
-        className="soundline-handle-left"
-        type="target"
-        position={Position.Left}
+        className="soundline-handle"
+        type="source"
+        position={Position.Bottom}
         id="source"
         isConnectable={props.isConnectable}
       />
@@ -118,4 +111,4 @@ const Conditionals = (props: any) => {
   );
 };
 
-export default Conditionals;
+export default GoToConditional;

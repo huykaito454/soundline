@@ -1,12 +1,7 @@
 import { Input } from "antd";
-import { useCallback } from "react";
 import { Handle, Position } from "reactflow";
 
-const PhoneNumber: any = ({ data, isConnectable }: any) => {
-  const onChange = useCallback((evt: any) => {
-    console.log(evt.target.value);
-  }, []);
-
+const PhoneNumber: any = (props: any) => {
   return (
     <div className="soundline-node">
       <div className="soundline-node-name">
@@ -35,18 +30,18 @@ const PhoneNumber: any = ({ data, isConnectable }: any) => {
         <div className="soundline-node-item">
           <label className="label">Number</label>
           <Input
-            value={data.phoneNumber}
+            value={props.data.phoneNumber}
             readOnly
             className="pointer-events-none"
           />
         </div>
       </div>
       <Handle
-        className="soundline-handle-right"
+        className="soundline-handle"
         type="source"
-        position={Position.Right}
-        id="next"
-        isConnectable={isConnectable}
+        position={Position.Bottom}
+        id="source"
+        isConnectable={props.isConnectable}
       />
     </div>
   );

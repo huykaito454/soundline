@@ -10,21 +10,35 @@ import ReactFlow, {
   ReactFlowInstance,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import PhoneNumber from "./Actions/PhoneNumber";
-import Conditionals from "./Actions/Conditionals";
+import PhoneNumber from "./MainActions/PhoneNumber";
+
 import Header from "../Header";
-import Departments from "./Actions/Departments";
+
 import { v4 as uuidv4 } from "uuid";
 import Sidebar from "../Sidebar";
+import GoToConditional from "./Actions/GoToConditional";
+import GoToDepartment from "./Actions/GoToDepartment";
+import Conditional from "./MainActions/Conditional";
+import Department from "./MainActions/Department";
+import CustomEdge from "./Other/CustomEdge";
+import Menu from "./MainActions/Menu";
+import MenuEdge from "./Other/MenuEdge";
+import GoToMenu from "./Actions/GoToMenu";
+
+const nodeTypes = {
+  phoneNumber: PhoneNumber,
+  goToConditional: GoToConditional,
+  goToDepartment: GoToDepartment,
+  conditional: Conditional,
+  department: Department,
+  menu: Menu,
+  goToMenu: GoToMenu,
+};
+const edgeTypes = {
+  custom: CustomEdge,
+  menu: MenuEdge,
+};
 const Flow = () => {
-  const nodeTypes = useMemo(
-    () => ({
-      phoneNumber: PhoneNumber,
-      conditionals: Conditionals,
-      departments: Departments,
-    }),
-    []
-  );
   const [nodes, setNodes] = useState<any>([
     {
       id: uuidv4(),
@@ -36,21 +50,50 @@ const Flow = () => {
     },
     {
       id: uuidv4(),
-      type: "conditionals",
-      position: { x: 230, y: 230 },
+      type: "conditional",
+      position: { x: 30, y: 230 },
+      data: {
+        name: "auto",
+        lineLimit: "0",
+        lineGroup: "0",
+      },
+    },
+    {
+      id: uuidv4(),
+      type: "department",
+      position: { x: 30, y: 530 },
+      data: {
+        name: "auto",
+      },
+    },
+    {
+      id: uuidv4(),
+      type: "menu",
+      position: { x: 430, y: 30 },
+      data: {
+        name: "auto",
+        timeout: "3",
+        maxDigits: "3",
+        msgFile: "greeting",
+      },
+    },
+    {
+      id: uuidv4(),
+      type: "goToConditional",
+      position: { x: 800, y: 230 },
       data: { name: "auto" },
     },
     {
       id: uuidv4(),
-      type: "departments",
-      position: { x: 630, y: 230 },
+      type: "goToDepartment",
+      position: { x: 800, y: 430 },
       data: { name: "auto" },
     },
   ]);
+  const [edges, setEdges] = useState<any>([]);
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] =
     useState<ReactFlowInstance | null>(null);
-  const [edges, setEdges] = useState<any>([]);
   const onNodesChange = useCallback(
     (changes: any) => setNodes((nds: any) => applyNodeChanges(changes, nds)),
     []
@@ -59,10 +102,22 @@ const Flow = () => {
     (changes: any) => setEdges((eds: any) => applyEdgeChanges(changes, eds)),
     []
   );
-  const onConnect = useCallback(
-    (params: any) => setEdges((eds: any) => addEdge(params, eds)),
-    []
-  );
+  const onConnect = useCallback((params: any) => {
+    if (params.sourceHandle == "menu-source") {
+      params.type = "menu";
+      params.data = {
+        value: "1",
+      };
+    } else {
+      params.type = "custom";
+      params.data = {
+        condition: "1",
+        value: "",
+      };
+    }
+
+    setEdges((eds: any) => addEdge(params, eds));
+  }, []);
   const onDragOver = useCallback((event: any) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = "move";
@@ -116,6 +171,7 @@ const Flow = () => {
               onDrop={onDrop}
               onDragOver={onDragOver}
               nodeTypes={nodeTypes}
+              edgeTypes={edgeTypes}
             >
               <Background />
               <Controls />

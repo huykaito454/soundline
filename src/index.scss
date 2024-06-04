@@ -17,19 +17,16 @@
     flex-direction: column;
     gap: 0.5rem;
     transition: 0.1s linear;
+
     &:active {
       outline: 1px solid #1677ff;
     }
     &:hover {
       @apply shadow-sm;
       border-color: #1677ff;
-      .soundline-handle-right {
+      .soundline-handle {
+        opacity: 1;
         scale: 1.2;
-        right: -4px;
-      }
-      .soundline-handle-left {
-        scale: 1.2;
-        left: -4px;
       }
     }
   }
@@ -65,20 +62,17 @@
     font-size: 12px;
     font-weight: 500;
   }
-  .soundline-handle-right {
+  .label-modal {
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .soundline-handle {
     background-color: #1677ff;
     width: 10px;
     height: 10px;
-    right: -5px;
     transition: 0.1s linear;
   }
-  .soundline-handle-left {
-    background-color: #1677ff;
-    width: 10px;
-    height: 10px;
-    left: -5px;
-    transition: 0.1s linear;
-  }
+
   .menu-item {
     @apply flex items-center p-2 gap-3 bg-white border rounded-lg cursor-grab font-medium transition-all;
     font-size: 13px;
@@ -86,4 +80,35 @@
       @apply bg-[#E6F4FF] border-[#E6F4FF];
     }
   }
+  .soundline-handle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: end;
+    margin: 0.25rem 0;
+  }
+  .soundline-handle-item {
+    background-color: #f7f7f7;
+    font-size: 12px;
+    padding: 0.25rem 1rem;
+    font-weight: 500;
+    border-radius: 5px;
+    position: relative;
+    .soundline-handle {
+      bottom: -5px !important;
+      opacity: 0;
+    }
+  }
+  .edge-label {
+    background-color: #f7f7f7;
+    font-size: 12px;
+    padding: 0.25rem 1rem;
+    font-weight: 500;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    cursor: pointer;
+  }
+}
+.ant-form-item {
+  margin-bottom: 0 !important;
 }
