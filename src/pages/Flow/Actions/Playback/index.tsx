@@ -6,7 +6,7 @@ import {
   duplicateNode,
   onChangeNode,
 } from "../../../../utils/common";
-const GoToDepartment = (props: any) => {
+const Playback = (props: any) => {
   const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
   const onChange = (evt: any) => {
@@ -24,27 +24,29 @@ const GoToDepartment = (props: any) => {
       <div className="soundline-node-name">
         <div className="logo">
           <svg
+            width="25px"
+            height="25px"
+            viewBox="0 0 32 32"
+            fill="currentColor"
+            x="128"
+            y="128"
+            role="img"
+            style={{
+              display: "inline-block",
+              verticalAlign: "middle",
+              padding: "2px",
+            }}
             xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            width="25"
-            height="25"
-            viewBox="0 0 48 48"
           >
-            <circle cx="24" cy="24" r="20" fill="#ffca28"></circle>
-            <path
-              fill="#fff"
-              d="M25,31v-3.436C25,25.901,21.669,25,20,25s-5,0.901-5,2.564V31H25z"
-            ></path>
-            <circle cx="20" cy="20" r="3" fill="#fff"></circle>
-            <path
-              fill="#fff"
-              d="M33,27.56V31h-6v-3.44c0-0.93-0.36-1.69-0.92-2.3C26.78,25.09,27.47,25,28,25	C29.67,25,33,25.9,33,27.56z"
-            ></path>
-            <circle cx="28" cy="20" r="3" fill="#fff"></circle>
+            <g fill="currentColor">
+              <path
+                fill="#00007f"
+                d="M17.229 4a.9.9 0 0 0-.569.232l-7.6 6.32a1.158 1.158 0 0 1-.955.328H3.208A1.2 1.2 0 0 0 2 12.088v7.826a1.2 1.2 0 0 0 1.208 1.206H8.1a1.158 1.158 0 0 1 .955.328l7.6 6.32c.521.433 1.081.224 1.081-.289V4.522A.494.494 0 0 0 17.229 4ZM27 6.3l-1.791 1.793a14.708 14.708 0 0 1 0 15.844l1.785 1.776A17.19 17.19 0 0 0 27 6.3Zm-4.333 4.323L20.905 12.4a6.035 6.035 0 0 1 0 7.237l1.756 1.756a8.554 8.554 0 0 0 .01-10.769Z"
+              />
+            </g>
           </svg>
         </div>
-        <div className="soundline-node-label">Go To Department</div>
+        <div className="soundline-node-label">Playback</div>
       </div>
       <Form
         form={form}
@@ -96,4 +98,4 @@ const GoToDepartment = (props: any) => {
   );
 };
 
-export default GoToDepartment;
+export default Playback;

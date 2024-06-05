@@ -41,9 +41,10 @@ const CustomEdge = ({
 
   const handleOk = () => {
     setIsModalOpen(false);
+    onChangeEdge(setEdges, id, form.getFieldsValue());
     const allFields = form.getFieldsValue();
-    onChangeEdge(setEdges, id, allFields);
-    form.setFieldsValue(data);
+    Object.keys(allFields).forEach((k) => (allFields[k] = allFields[k].trim()));
+    form.setFieldsValue(allFields);
   };
 
   const handleCancel = () => {

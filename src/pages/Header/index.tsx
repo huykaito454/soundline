@@ -1,8 +1,13 @@
-import { Button } from "antd";
+import { Button, notification } from "antd";
 import { StarOutlined } from "@ant-design/icons";
 import myImage from "../../assets/images/logo.png";
 const Header = ({ nodes, edges }: any) => {
   const handleClick = () => {
+    notification["success"]({
+      message: "Notification",
+      description: "Publish the flow successfully!",
+      placement: "bottomRight",
+    });
     console.log(nodes, edges);
   };
   return (

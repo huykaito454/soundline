@@ -6,7 +6,7 @@ import {
   duplicateNode,
   onChangeNode,
 } from "../../../../utils/common";
-const GoToDepartment = (props: any) => {
+const StartRecord = (props: any) => {
   const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
   const onChange = (evt: any) => {
@@ -24,27 +24,32 @@ const GoToDepartment = (props: any) => {
       <div className="soundline-node-name">
         <div className="logo">
           <svg
+            width="25px"
+            height="25px"
+            viewBox="0 0 32 32"
+            fill="#000000"
+            x="128"
+            y="128"
+            role="img"
+            style={{
+              display: "inline-block",
+              verticalAlign: "middle",
+              padding: "2px",
+            }}
             xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            width="25"
-            height="25"
-            viewBox="0 0 48 48"
           >
-            <circle cx="24" cy="24" r="20" fill="#ffca28"></circle>
-            <path
-              fill="#fff"
-              d="M25,31v-3.436C25,25.901,21.669,25,20,25s-5,0.901-5,2.564V31H25z"
-            ></path>
-            <circle cx="20" cy="20" r="3" fill="#fff"></circle>
-            <path
-              fill="#fff"
-              d="M33,27.56V31h-6v-3.44c0-0.93-0.36-1.69-0.92-2.3C26.78,25.09,27.47,25,28,25	C29.67,25,33,25.9,33,27.56z"
-            ></path>
-            <circle cx="28" cy="20" r="3" fill="#fff"></circle>
+            <g fill="black">
+              <g fill="none">
+                <circle cx="16" cy="16" r="16" fill="#E8403E" />
+                <path
+                  fill="#fff"
+                  d="M25.696 15.732c.72 0 1.304.57 1.304 1.275s-.584 1.275-1.304 1.275c-.55 0-1.021-.334-1.212-.805h-3.72l-1.372 2.44c-.226.402-.845.283-.899-.172l-.308-2.607l-1.14 8.454c-.076.562-.917.536-.956-.03l-.935-13.667l-.99 9.054c-.06.54-.853.568-.95.033l-1.048-5.756l-.484 1.895a.479.479 0 0 1-.466.356H6.48c-.265 0-.48-.21-.48-.47s.215-.47.48-.47h4.36l.939-3.671c.126-.492.848-.467.94.032l.849 4.669L14.787 6.42c.063-.571.918-.555.957.018l.981 14.34l1.014-7.524c.074-.549.889-.543.954.007l.582 4.915l.784-1.396a.482.482 0 0 1 .421-.243h4.004a1.304 1.304 0 0 1 1.212-.805z"
+                />
+              </g>
+            </g>
           </svg>
         </div>
-        <div className="soundline-node-label">Go To Department</div>
+        <div className="soundline-node-label">Start Record</div>
       </div>
       <Form
         form={form}
@@ -96,4 +101,4 @@ const GoToDepartment = (props: any) => {
   );
 };
 
-export default GoToDepartment;
+export default StartRecord;

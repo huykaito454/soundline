@@ -42,9 +42,39 @@ const Department = (props: any) => {
         initialValues={props.data}
       >
         <div className="soundline-node-item">
+          <label className="label">Ext</label>
+          <Form.Item name="ext">
+            <Input className="nodrag" placeholder="Ext" />
+          </Form.Item>
+        </div>
+        <div className="soundline-node-item">
           <label className="label">Name</label>
           <Form.Item name="name">
             <Input className="nodrag" placeholder="Name" />
+          </Form.Item>
+        </div>
+        <div className="soundline-node-item">
+          <label className="label">Hours</label>
+          <Form.Item name="hours">
+            <Input className="nodrag" placeholder="Hours" />
+          </Form.Item>
+        </div>
+        <div className="soundline-node-item">
+          <label className="label">VoiceMail Box</label>
+          <Form.Item name="vmBox">
+            <Input className="nodrag" placeholder="VoiceMail Box" />
+          </Form.Item>
+        </div>
+        <div className="soundline-node-item">
+          <label className="label">Greeting</label>
+          <Form.Item name="greeting">
+            <Input className="nodrag" placeholder="Greeting" />
+          </Form.Item>
+        </div>
+        <div className="soundline-node-item">
+          <label className="label">Greeting After Hours</label>
+          <Form.Item name="greetingAfterHours">
+            <Input className="nodrag" placeholder="Greeting After Hours" />
           </Form.Item>
         </div>
       </Form>

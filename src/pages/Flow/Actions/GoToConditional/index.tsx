@@ -9,7 +9,7 @@ import {
 
 const GoToConditional = (props: any) => {
   const [form] = Form.useForm();
-  const { setNodes } = useReactFlow();
+  const { setNodes, setEdges } = useReactFlow();
   const onChange = (evt: any) => {
     const allFields = form.getFieldsValue();
     onChangeNode(setNodes, props, allFields);
@@ -18,7 +18,7 @@ const GoToConditional = (props: any) => {
     duplicateNode(setNodes, props);
   };
   const handleDelete = () => {
-    deleteNode(setNodes, props);
+    deleteNode(setNodes, setEdges, props);
   };
   return (
     <div className="soundline-node">

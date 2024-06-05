@@ -6,7 +6,7 @@ import {
   duplicateNode,
   onChangeNode,
 } from "../../../../utils/common";
-const GoToDepartment = (props: any) => {
+const VoiceMail = (props: any) => {
   const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
   const onChange = (evt: any) => {
@@ -24,27 +24,29 @@ const GoToDepartment = (props: any) => {
       <div className="soundline-node-name">
         <div className="logo">
           <svg
+            width="25px"
+            height="25px"
+            viewBox="0 0 256 256"
+            fill="#7CC504"
+            x="128"
+            y="128"
+            role="img"
+            style={{
+              display: "inline-block",
+              verticalAlign: "middle",
+              padding: "2px",
+            }}
             xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            width="25"
-            height="25"
-            viewBox="0 0 48 48"
           >
-            <circle cx="24" cy="24" r="20" fill="#ffca28"></circle>
-            <path
-              fill="#fff"
-              d="M25,31v-3.436C25,25.901,21.669,25,20,25s-5,0.901-5,2.564V31H25z"
-            ></path>
-            <circle cx="20" cy="20" r="3" fill="#fff"></circle>
-            <path
-              fill="#fff"
-              d="M33,27.56V31h-6v-3.44c0-0.93-0.36-1.69-0.92-2.3C26.78,25.09,27.47,25,28,25	C29.67,25,33,25.9,33,27.56z"
-            ></path>
-            <circle cx="28" cy="20" r="3" fill="#fff"></circle>
+            <g fill="#7CC504">
+              <path
+                fill="#7CC504"
+                d="M196 68a60 60 0 0 0-48 96h-40a60 60 0 1 0-48 24h136a60 60 0 0 0 0-120ZM24 128a36 36 0 1 1 36 36a36 36 0 0 1-36-36Zm172 36a36 36 0 1 1 36-36a36 36 0 0 1-36 36Z"
+              />
+            </g>
           </svg>
         </div>
-        <div className="soundline-node-label">Go To Department</div>
+        <div className="soundline-node-label">VoiceMail</div>
       </div>
       <Form
         form={form}
@@ -96,4 +98,4 @@ const GoToDepartment = (props: any) => {
   );
 };
 
-export default GoToDepartment;
+export default VoiceMail;

@@ -14,7 +14,7 @@ export const onChangeEdge = (setEdge: any, id: any, newData: any) => {
   if (!newData.hasOwnProperty("value")) {
     newData.value = "";
   }
-
+  Object.keys(newData).forEach((k) => (newData[k] = newData[k].trim()));
   setEdge((edges: any) =>
     edges.map((item: any) => {
       if (item.id === id) {
@@ -36,6 +36,11 @@ export const duplicateNode = (setNodes: any, node: any) => {
   setNodes((nodes: any) => [...nodes, duplicatedNode]);
 };
 //Delete Action
-export const deleteNode = (setNodes: any, node: any) => {
+export const deleteNode = (setNodes: any, setEdges: any, node: any) => {
   setNodes((nodes: any) => nodes.filter((item: any) => item.id !== node.id));
+  setEdges((eds: any) =>
+    eds.filter(
+      (item: any) => item.source !== node.id && item.target !== node.id
+    )
+  );
 };

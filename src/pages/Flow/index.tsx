@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactFlow, {
   Controls,
   Background,
@@ -24,6 +24,16 @@ import CustomEdge from "./Other/CustomEdge";
 import Menu from "./MainActions/Menu";
 import MenuEdge from "./Other/MenuEdge";
 import GoToMenu from "./Actions/GoToMenu";
+import { useLocation } from "react-router-dom";
+import {
+  conditionalData,
+  departmentData,
+  menuData,
+  phoneNumberData,
+} from "../../data";
+import StartRecord from "./Actions/StartRecord";
+import VoiceMail from "./Actions/VoiceMail";
+import Playback from "./Actions/Playback";
 
 const nodeTypes = {
   phoneNumber: PhoneNumber,
@@ -33,67 +43,41 @@ const nodeTypes = {
   department: Department,
   menu: Menu,
   goToMenu: GoToMenu,
+  startRecord: StartRecord,
+  voiceMail: VoiceMail,
+  playback: Playback,
 };
 const edgeTypes = {
   custom: CustomEdge,
   menu: MenuEdge,
 };
 const Flow = () => {
-  const [nodes, setNodes] = useState<any>([
-    {
-      id: uuidv4(),
-      type: "phoneNumber",
-      position: { x: 30, y: 30 },
-      data: {
-        phoneNumber: "4259475220",
-      },
-    },
-    {
-      id: uuidv4(),
-      type: "conditional",
-      position: { x: 30, y: 230 },
-      data: {
-        name: "auto",
-        lineLimit: "0",
-        lineGroup: "0",
-      },
-    },
-    {
-      id: uuidv4(),
-      type: "department",
-      position: { x: 30, y: 530 },
-      data: {
-        name: "auto",
-      },
-    },
-    {
-      id: uuidv4(),
-      type: "menu",
-      position: { x: 430, y: 30 },
-      data: {
-        name: "auto",
-        timeout: "3",
-        maxDigits: "3",
-        msgFile: "greeting",
-      },
-    },
-    {
-      id: uuidv4(),
-      type: "goToConditional",
-      position: { x: 800, y: 230 },
-      data: { name: "auto" },
-    },
-    {
-      id: uuidv4(),
-      type: "goToDepartment",
-      position: { x: 800, y: 430 },
-      data: { name: "auto" },
-    },
-  ]);
+  const location = useLocation();
+  const currentPath = location.pathname;
   const [edges, setEdges] = useState<any>([]);
-  const reactFlowWrapper = useRef(null);
+  const reactFlowWrapper = useRef<any>(null);
+  const ref = useRef<any>(null);
   const [reactFlowInstance, setReactFlowInstance] =
     useState<ReactFlowInstance | null>(null);
+  const [nodes, setNodes] = useState<any>([]);
+  useEffect(() => {
+    if (ref.current) {
+      let flow: any = [];
+      if (currentPath.includes("/phone-number/")) {
+        flow = phoneNumberData;
+      }
+      if (currentPath.includes("/conditional/")) {
+        flow = conditionalData;
+      }
+      if (currentPath.includes("/department/")) {
+        flow = departmentData;
+      }
+      if (currentPath.includes("/menu/")) {
+        flow = menuData;
+      }
+      setNodes(flow);
+    }
+  }, []);
   const onNodesChange = useCallback(
     (changes: any) => setNodes((nds: any) => applyNodeChanges(changes, nds)),
     []
@@ -103,20 +87,36 @@ const Flow = () => {
     []
   );
   const onConnect = useCallback((params: any) => {
-    if (params.sourceHandle == "menu-source") {
-      params.type = "menu";
-      params.data = {
-        value: "1",
-      };
-    } else {
-      params.type = "custom";
-      params.data = {
-        condition: "1",
-        value: "",
-      };
+    if (!currentPath.includes("/department/")) {
+      if (params.sourceHandle == "menu-source") {
+        params.type = "menu";
+        params.data = {
+          value: "1",
+        };
+      } else {
+        params.type = "custom";
+        params.data = {
+          condition: "1",
+          value: "",
+        };
+      }
     }
-
-    setEdges((eds: any) => addEdge(params, eds));
+    if (params.sourceHandle == "menu-source") {
+      setEdges((eds: any) => addEdge(params, eds));
+    } else {
+      setEdges((eds: any) => {
+        const existed = eds.filter(
+          (x: any) =>
+            (x.source === params.source &&
+              x.sourceHandle === params.sourceHandle) ||
+            x.target === params.target
+        );
+        if (existed.length === 0) {
+          return addEdge(params, eds);
+        }
+        return eds;
+      });
+    }
   }, []);
   const onDragOver = useCallback((event: any) => {
     event.preventDefault();
@@ -126,14 +126,11 @@ const Flow = () => {
   const onDrop = useCallback(
     (event: any) => {
       event.preventDefault();
-
       const type = event.dataTransfer.getData("type");
       const data = event.dataTransfer.getData("dataNode");
-
       if (typeof type === "undefined" || !type) {
         return;
       }
-
       const position = reactFlowInstance?.screenToFlowPosition({
         x: event.clientX,
         y: event.clientY,
@@ -144,13 +141,12 @@ const Flow = () => {
         position,
         data: JSON.parse(data),
       };
-
       setNodes((nds: any) => nds.concat(newNode));
     },
     [reactFlowInstance]
   );
   return (
-    <div className="w-full h-[100vh]">
+    <div className="w-full h-[100vh]" ref={ref}>
       <ReactFlowProvider>
         <Header nodes={nodes} edges={edges}></Header>
         <div
@@ -175,7 +171,7 @@ const Flow = () => {
             >
               <Background />
               <Controls />
-              <MiniMap nodeStrokeWidth={3} />
+              <MiniMap nodeStrokeWidth={3} pannable={true} zoomable={true} />
             </ReactFlow>
           </div>
         </div>
