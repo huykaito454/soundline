@@ -35,8 +35,13 @@ import StartRecord from "./Actions/StartRecord";
 import VoiceMail from "./Actions/VoiceMail";
 import Playback from "./Actions/Playback";
 import GoToExtension from "./Actions/GotoExtension";
-import { returnConditionFlow, returnPhoneNumberFlow } from "../../utils/common";
-import { conditional, customerNumbers } from "../../mockData";
+import {
+  returnConditionFlow,
+  returnDepartmentFlow,
+  returnMenuFlow,
+  returnPhoneNumberFlow,
+} from "../../utils/common";
+import { conditional, customerNumbers, department, menu } from "../../mockData";
 
 const nodeTypes = {
   phoneNumber: PhoneNumber,
@@ -80,10 +85,14 @@ const Flow = () => {
         flow = returnConditionFlow(dataFined);
       }
       if (currentPath.includes("/department/")) {
-        flow = departmentData;
+        let data = department;
+        let dataFined = data.find((x: any) => x.id == id);
+        flow = returnDepartmentFlow(dataFined);
       }
       if (currentPath.includes("/menu/")) {
-        flow = menuData;
+        let data = menu;
+        let dataFined = data.find((x: any) => x.id == id);
+        flow = returnMenuFlow(dataFined);
       }
       setNodes(flow.nodes);
       setEdges(flow.edges);
@@ -183,6 +192,7 @@ const Flow = () => {
               nodeTypes={nodeTypes}
               edgeTypes={edgeTypes}
               defaultViewport={{ x: 0, y: 0, zoom: 0.9 }}
+              fitView
             >
               <Background />
               <Controls />

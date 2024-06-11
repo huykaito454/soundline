@@ -6,6 +6,7 @@ import {
   duplicateNode,
   onChangeNode,
 } from "../../../../utils/common";
+import { department } from "../../../../mockData";
 const GoToDepartment = (props: any) => {
   const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
@@ -20,7 +21,9 @@ const GoToDepartment = (props: any) => {
     deleteNode(setNodes, setEdges, props);
   };
   const handleEdit = () => {
-    window.open("/department/1");
+    let data = department;
+    let dataFined = data.find((x: any) => x.name == props.data.name);
+    window.open("/department/" + dataFined?.id);
   };
   return (
     <div className="soundline-node">

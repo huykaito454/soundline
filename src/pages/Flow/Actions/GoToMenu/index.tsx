@@ -6,6 +6,7 @@ import {
   duplicateNode,
   onChangeNode,
 } from "../../../../utils/common";
+import { menu } from "../../../../mockData";
 const GoToMenu = (props: any) => {
   const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
@@ -20,7 +21,9 @@ const GoToMenu = (props: any) => {
     deleteNode(setNodes, setEdges, props);
   };
   const handleEdit = () => {
-    window.open("/menu/1");
+    let data = menu;
+    let dataFined = data.find((x: any) => x.name == props.data.name);
+    window.open("/menu/" + dataFined?.id);
   };
   return (
     <div className="soundline-node">

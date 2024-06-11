@@ -87,6 +87,50 @@ export const returnPhoneNumberFlow = (data: any) => {
   }
   return { nodes: nodes, edges: edges };
 };
+export const returnMenuFlow = (data: any) => {
+  let nodes: any = [];
+  let edges: any = [];
+  let xPosition = -330;
+  let yPosition = 500;
+  nodes.push({
+    id: "0",
+    type: "menu",
+    position: { x: 120, y: 40 },
+    data: {
+      name: data.name,
+      timeout: data.menuTimeout,
+      maxDigits: data.maxDigits,
+      msgFile: data.msgFile,
+    },
+  });
+  try {
+    //Handle Rule
+    let rules = data.menu.split("|");
+    rules = rules.filter((item: any) => item !== "");
+    rules.forEach((command: any) => {
+      let newNode = addNewNode(command, nodes);
+      if (newNode != null) {
+        xPosition = xPosition + 350;
+        console.log(xPosition);
+        newNode.node.position.y = yPosition;
+        newNode.node.position.x = xPosition;
+        nodes.push(newNode.node);
+        edges.push(
+          addConnection(
+            0,
+            nodes.length - 1,
+            "menu-source",
+            "menu",
+            newNode.conditional
+          )
+        );
+      }
+    });
+  } catch (error) {
+    return { nodes: nodes, edges: edges };
+  }
+  return { nodes: nodes, edges: edges };
+};
 export const returnConditionFlow = (data: any) => {
   let nodes: any = [];
   let edges: any = [];
@@ -164,10 +208,115 @@ export const returnConditionFlow = (data: any) => {
   }
   return { nodes: nodes, edges: edges };
 };
+export const returnDepartmentFlow = (data: any) => {
+  let nodes: any = [];
+  let edges: any = [];
+  let yPositionOpen = 40;
+  let yPositionClose = 40;
+  let yPositionDown = 40;
+  let xPosition = 120;
+  nodes.push({
+    id: "0",
+    type: "department",
+    position: { x: xPosition, y: yPositionOpen },
+    data: {
+      ext: data.ext,
+      prefix: data.prefix,
+      name: data.name,
+      hours: data.hours,
+      vmBox: data.vmbox,
+      greeting: data.custGreeting,
+      greetingAfterHours: data.custGreetAfterHours,
+    },
+  });
+  try {
+    //Handle Rule
+    let rules = data.openRules.split("|");
+    rules = rules.filter((item: any) => item !== "");
+    rules.forEach((command: any) => {
+      let newNode = addNewNode(command, nodes, "department");
 
-const addNewNode = (data: any, nodes: any) => {
+      if (newNode != null) {
+        if (yPositionOpen > 250) {
+          yPositionOpen = yPositionOpen + 250;
+        } else {
+          yPositionOpen = yPositionOpen + 600;
+        }
+        newNode.node.position.y = yPositionOpen;
+        newNode.node.position.x = xPosition + 700;
+        nodes.push(newNode.node);
+        edges.push(addConnection(nodes.length - 2, nodes.length - 1, "source"));
+      }
+    });
+
+    //Handle Close Rule
+    let closedRules = data.closedRules.split("|");
+    let firstClosedNode = false;
+    closedRules = closedRules.filter((item: any) => item !== "");
+    closedRules.forEach((command: any) => {
+      let newNode = addNewNode(command, nodes, "department");
+      if (newNode != null) {
+        if (yPositionClose > 250) {
+          yPositionClose = yPositionClose + 250;
+        } else {
+          yPositionClose = yPositionClose + 600;
+        }
+        newNode.node.position.y = yPositionClose;
+        newNode.node.position.x = xPosition + 300;
+        nodes.push(newNode.node);
+        edges.push(
+          addConnection(
+            !firstClosedNode ? 0 : nodes.length - 2,
+            nodes.length - 1,
+            !firstClosedNode ? "close" : "source",
+            "department"
+          )
+        );
+        firstClosedNode = true;
+      }
+    });
+
+    //Handle Down Rule
+
+    let downRules = data.downRules.split("|");
+    let firstDownNode = false;
+    downRules = downRules.filter((item: any) => item !== "");
+    downRules.forEach((command: any) => {
+      let newNode = addNewNode(command, nodes, "department");
+      if (newNode != null) {
+        if (yPositionDown > 250) {
+          yPositionDown = yPositionDown + 250;
+        } else {
+          yPositionDown = yPositionDown + 600;
+        }
+        newNode.node.position.y = yPositionDown;
+        newNode.node.position.x = xPosition - 100;
+        nodes.push(newNode.node);
+        edges.push(
+          addConnection(
+            !firstDownNode ? 0 : nodes.length - 2,
+            nodes.length - 1,
+            !firstDownNode ? "down" : "source",
+            "department"
+          )
+        );
+        firstDownNode = true;
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    return { nodes: nodes, edges: edges };
+  }
+  return { nodes: nodes, edges: edges };
+};
+
+const addNewNode = (data: any, nodes: any, type: any = null) => {
   let command = data.split("/");
-  if (command.length == 2) {
+  if (command.length == 2 || (command.length == 1 && type == "department")) {
+    if (type == "department") {
+      command[1] = command[0];
+    }
+
     let nodeReturn: any = null;
     let node = command[1].split(":");
     if (node[0] == "c") {
@@ -290,12 +439,24 @@ const addConnection = (
   if (type == "phoneNumber") {
     return addConnectionEdges(sourceNode, targetNode);
   }
+  if (type == "department") {
+    return addConnectionEdges(sourceNode, targetNode, sourceHandle);
+  }
   if (type == "conditional") {
     return addConnectionEdges(
       sourceNode,
       targetNode,
       sourceHandle,
       "custom",
+      conditionalData
+    );
+  }
+  if (type == "menu") {
+    return addConnectionEdges(
+      sourceNode,
+      targetNode,
+      sourceHandle,
+      "menu",
       conditionalData
     );
   }
@@ -319,7 +480,24 @@ const addConnectionEdges = (
     connection["type"] = type;
     connection["data"] = handleConditionData(conditionalData);
   }
+  if (type == "menu") {
+    connection["type"] = type;
+    connection["data"] = handleMenuData(conditionalData);
+  }
   return connection;
+};
+const handleMenuData = (conditionalData: any) => {
+  let data = {
+    value: "1",
+  };
+  try {
+    if (conditionalData) {
+      data.value = conditionalData;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return data;
 };
 const handleConditionData = (conditionalData: any) => {
   let data = {

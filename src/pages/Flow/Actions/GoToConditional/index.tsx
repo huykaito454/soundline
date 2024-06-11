@@ -6,6 +6,7 @@ import {
   duplicateNode,
   onChangeNode,
 } from "../../../../utils/common";
+import { conditional } from "../../../../mockData";
 
 const GoToConditional = (props: any) => {
   const [form] = Form.useForm();
@@ -21,7 +22,9 @@ const GoToConditional = (props: any) => {
     deleteNode(setNodes, setEdges, props);
   };
   const handleEdit = () => {
-    window.open("/conditional/1");
+    let data = conditional;
+    let dataFined = data.find((x: any) => x.name == props.data.name);
+    window.open("/conditional/" + dataFined?.id);
   };
   return (
     <div className="soundline-node">
