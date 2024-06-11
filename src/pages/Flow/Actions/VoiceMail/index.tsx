@@ -55,9 +55,9 @@ const VoiceMail = (props: any) => {
         initialValues={props.data}
       >
         <div className="soundline-node-item">
-          <label className="label">Name</label>
-          <Form.Item name="name">
-            <Input className="nodrag" placeholder="Name" />
+          <label className="label">Voicemail Box</label>
+          <Form.Item name="voicemailBox">
+            <Input className="nodrag" placeholder="Voicemail Box" />
           </Form.Item>
         </div>
       </Form>

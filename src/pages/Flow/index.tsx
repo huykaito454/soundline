@@ -24,7 +24,7 @@ import CustomEdge from "./Other/CustomEdge";
 import Menu from "./MainActions/Menu";
 import MenuEdge from "./Other/MenuEdge";
 import GoToMenu from "./Actions/GoToMenu";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import {
   conditionalData,
   departmentData,
@@ -34,6 +34,9 @@ import {
 import StartRecord from "./Actions/StartRecord";
 import VoiceMail from "./Actions/VoiceMail";
 import Playback from "./Actions/Playback";
+import GoToExtension from "./Actions/GotoExtension";
+import { returnConditionFlow, returnPhoneNumberFlow } from "../../utils/common";
+import { conditional, customerNumbers } from "../../mockData";
 
 const nodeTypes = {
   phoneNumber: PhoneNumber,
@@ -46,12 +49,14 @@ const nodeTypes = {
   startRecord: StartRecord,
   voiceMail: VoiceMail,
   playback: Playback,
+  goToExtension: GoToExtension,
 };
 const edgeTypes = {
   custom: CustomEdge,
   menu: MenuEdge,
 };
 const Flow = () => {
+  const { id } = useParams();
   const location = useLocation();
   const currentPath = location.pathname;
   const [edges, setEdges] = useState<any>([]);
@@ -60,14 +65,19 @@ const Flow = () => {
   const [reactFlowInstance, setReactFlowInstance] =
     useState<ReactFlowInstance | null>(null);
   const [nodes, setNodes] = useState<any>([]);
+
   useEffect(() => {
     if (ref.current) {
       let flow: any = [];
       if (currentPath.includes("/phone-number/")) {
-        flow = phoneNumberData;
+        let data = customerNumbers;
+        let dataFined = data.find((x: any) => x.id == id);
+        flow = returnPhoneNumberFlow(dataFined);
       }
       if (currentPath.includes("/conditional/")) {
-        flow = conditionalData;
+        let data = conditional;
+        let dataFined = data.find((x: any) => x.id == id);
+        flow = returnConditionFlow(dataFined);
       }
       if (currentPath.includes("/department/")) {
         flow = departmentData;
@@ -75,7 +85,8 @@ const Flow = () => {
       if (currentPath.includes("/menu/")) {
         flow = menuData;
       }
-      setNodes(flow);
+      setNodes(flow.nodes);
+      setEdges(flow.edges);
     }
   }, []);
   const onNodesChange = useCallback(
@@ -87,7 +98,10 @@ const Flow = () => {
     []
   );
   const onConnect = useCallback((params: any) => {
-    if (!currentPath.includes("/department/")) {
+    if (
+      !currentPath.includes("/department/") &&
+      !currentPath.includes("/phone-number/")
+    ) {
       if (params.sourceHandle == "menu-source") {
         params.type = "menu";
         params.data = {
@@ -168,6 +182,7 @@ const Flow = () => {
               onDragOver={onDragOver}
               nodeTypes={nodeTypes}
               edgeTypes={edgeTypes}
+              defaultViewport={{ x: 0, y: 0, zoom: 0.9 }}
             >
               <Background />
               <Controls />

@@ -28,8 +28,9 @@ export const departmentData = [
     position: { x: 120, y: 40 },
     data: {
       ext: "300",
+      prefix: "",
       name: "auto",
-      hours: "9:00-17:00,mon-fri,*,*/o",
+      hours: "9:00-17:00,mon-fri,*,*",
       vmBox: "700",
       greeting: "greeting",
       greetingAfterHours: "greetingAfterHours",

@@ -48,6 +48,12 @@ const Department = (props: any) => {
           </Form.Item>
         </div>
         <div className="soundline-node-item">
+          <label className="label">Prefix</label>
+          <Form.Item name="prefix">
+            <Input className="nodrag" placeholder="Prefix" />
+          </Form.Item>
+        </div>
+        <div className="soundline-node-item">
           <label className="label">Name</label>
           <Form.Item name="name">
             <Input className="nodrag" placeholder="Name" />

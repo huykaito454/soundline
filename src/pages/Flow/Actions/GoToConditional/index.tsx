@@ -1,4 +1,4 @@
-import { CopyOutlined, DeleteOutlined } from "@ant-design/icons";
+import { CopyOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
 import {
@@ -19,6 +19,9 @@ const GoToConditional = (props: any) => {
   };
   const handleDelete = () => {
     deleteNode(setNodes, setEdges, props);
+  };
+  const handleEdit = () => {
+    window.open("/conditional/1");
   };
   return (
     <div className="soundline-node">
@@ -67,9 +70,19 @@ const GoToConditional = (props: any) => {
       >
         <div className="soundline-node-item">
           <label className="label">Name</label>
-          <Form.Item name="name">
-            <Input className="nodrag" placeholder="Name" />
-          </Form.Item>
+          <div className="flex gap-2 w-full">
+            <Form.Item name="name" className="flex-1">
+              <Input className="nodrag" placeholder="Name" />
+            </Form.Item>
+            <Form.Item>
+              <Button
+                icon={<EditOutlined />}
+                title="Edit"
+                disabled={!props.data.name}
+                onClick={handleEdit}
+              ></Button>
+            </Form.Item>
+          </div>
         </div>
       </Form>
       <NodeToolbar

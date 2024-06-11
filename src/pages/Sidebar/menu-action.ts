@@ -98,10 +98,18 @@ export const menu = [
     data: { name: "" },
   },
   {
+    type: "goToExtension",
+    name: "Go To Extension",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 48 48">
+<circle cx="24" cy="24" r="20" fill="#2979ff"></circle><circle cx="24" cy="19" r="4" fill="#2962ff"></circle><path fill="#2962ff" d="M24,26c0,0-9,0-9,5.727C15,35,16.636,35,24,35s9,0,9-3.273C33,26,24,26,24,26z"></path><circle cx="24" cy="18" r="4" fill="#fff"></circle><path fill="#fff" d="M24,25c0,0-9,0-9,5.727C15,34,16.636,34,24,34s9,0,9-3.273C33,25,24,25,24,25z"></path>
+</svg>`,
+    data: { number: "", ringtoneNumber: "" },
+  },
+  {
     type: "voiceMail",
     name: "VoiceMail",
     icon: `<svg width="25px" height="25px" viewBox="0 0 256 256" fill="#7CC504" x="128" y="128" role="img" style="display:inline-block;vertical-align:middle;padding: 2px" xmlns="http://www.w3.org/2000/svg"><g fill="#7CC504"><path fill="#7CC504" d="M196 68a60 60 0 0 0-48 96h-40a60 60 0 1 0-48 24h136a60 60 0 0 0 0-120ZM24 128a36 36 0 1 1 36 36a36 36 0 0 1-36-36Zm172 36a36 36 0 1 1 36-36a36 36 0 0 1-36 36Z"/></g></svg>`,
-    data: { name: "" },
+    data: { voicemailBox: "" },
   },
   {
     type: "startRecord",
