@@ -2,8 +2,7 @@ export const customerNumbers = [
   {
     id: 1,
     phoneNumber: 4259475220,
-    conditionalName:
-      "1!/e:700.5|1!/c:conditional1|1!/p:intro|1!/v:300|1!/rec:in",
+    conditionalName: "1!/v:700",
   },
   { id: 2, phoneNumber: 4259475221, conditionalName: "" },
 ];

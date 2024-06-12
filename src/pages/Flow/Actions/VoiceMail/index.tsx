@@ -1,5 +1,5 @@
 import { CopyOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Radio } from "antd";
 import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
 import {
   deleteNode,
@@ -7,6 +7,7 @@ import {
   onChangeNode,
 } from "../../../../utils/common";
 const VoiceMail = (props: any) => {
+  const currentPath = location.pathname;
   const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
   const onChange = (evt: any) => {
@@ -55,6 +56,22 @@ const VoiceMail = (props: any) => {
         initialValues={props.data}
       >
         <div className="soundline-node-item">
+          <label className="label">Type</label>
+          <Form.Item name="type">
+            <Radio.Group
+              defaultValue="v"
+              buttonStyle="solid"
+              className="nodrag"
+            >
+              <Radio.Button value="v">Default</Radio.Button>
+              <Radio.Button value="va">Admin</Radio.Button>
+              <Radio.Button value="vb">Busy</Radio.Button>
+              <Radio.Button value="vs">Silent</Radio.Button>
+              <Radio.Button value="vu">Unavailable</Radio.Button>
+            </Radio.Group>
+          </Form.Item>
+        </div>
+        <div className="soundline-node-item">
           <label className="label">Voicemail Box</label>
           <Form.Item name="voicemailBox">
             <Input className="nodrag" placeholder="Voicemail Box" />
@@ -87,15 +104,16 @@ const VoiceMail = (props: any) => {
         id="target"
         isConnectable={props.isConnectable}
       />
-      <Handle
-        className="soundline-handle"
-        type="source"
-        position={Position.Bottom}
-        id="source"
-        isConnectable={props.isConnectable}
-      />
+      {!currentPath.includes("/menu/") && (
+        <Handle
+          className="soundline-handle"
+          type="source"
+          position={Position.Bottom}
+          id="source"
+          isConnectable={props.isConnectable}
+        />
+      )}
     </div>
   );
 };
-
 export default VoiceMail;

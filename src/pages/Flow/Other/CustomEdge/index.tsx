@@ -55,9 +55,13 @@ const CustomEdge = ({
     setIsModalOpen(false);
     setEdges((edges: any) => edges.filter((item: any) => item.id !== id));
   };
+  const customStyle = {
+    ...style,
+    stroke: "#1677ff",
+  };
   return (
     <>
-      <BaseEdge path={edgePath} markerEnd={markerEnd} style={style} />
+      <BaseEdge path={edgePath} markerEnd={markerEnd} style={customStyle} />
       <EdgeLabelRenderer>
         <div
           style={{

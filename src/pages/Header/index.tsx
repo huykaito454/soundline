@@ -1,6 +1,7 @@
 import { Button, Space, notification } from "antd";
 import { StarOutlined } from "@ant-design/icons";
 import myImage from "../../assets/images/logo.png";
+import myImage2 from "../../assets/images/SoundLinePortal-logo.png";
 import Input from "antd/es/input/Input";
 import { useState } from "react";
 const Header = ({ nodes, edges, onClick }: any) => {
@@ -28,7 +29,7 @@ const Header = ({ nodes, edges, onClick }: any) => {
 
   return (
     <div className="py-3 px-6 pl-4 flex items-center justify-between border-b shadow-sm">
-      <div className="w-28 flex items-center">
+      <div className="w-28 flex items-center gap-16">
         <img src={myImage} alt="" />
       </div>
       <div className="flex gap-2">

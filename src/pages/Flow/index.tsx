@@ -42,6 +42,7 @@ import {
   returnPhoneNumberFlow,
 } from "../../utils/common";
 import { conditional, customerNumbers, department, menu } from "../../mockData";
+import DefaultEdge from "./Other/DefaultEdge";
 
 const nodeTypes = {
   phoneNumber: PhoneNumber,
@@ -59,6 +60,7 @@ const nodeTypes = {
 const edgeTypes = {
   custom: CustomEdge,
   menu: MenuEdge,
+  default: DefaultEdge,
 };
 const Flow = () => {
   const { id } = useParams();
@@ -123,6 +125,8 @@ const Flow = () => {
           value: "",
         };
       }
+    } else {
+      params.type = "default";
     }
     if (params.sourceHandle == "menu-source") {
       setEdges((eds: any) => addEdge(params, eds));
@@ -205,7 +209,6 @@ const Flow = () => {
               nodeTypes={nodeTypes}
               edgeTypes={edgeTypes}
               defaultViewport={{ x: 0, y: 0, zoom: 0.9 }}
-              fitView
             >
               <Background />
               <Controls />

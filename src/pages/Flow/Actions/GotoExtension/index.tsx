@@ -7,6 +7,7 @@ import {
   onChangeNode,
 } from "../../../../utils/common";
 const GoToExtension = (props: any) => {
+  const currentPath = location.pathname;
   const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
   const onChange = (evt: any) => {
@@ -24,24 +25,30 @@ const GoToExtension = (props: any) => {
       <div className="soundline-node-name">
         <div className="logo">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            width="25"
-            height="25"
+            width="25px"
+            height="25px"
             viewBox="0 0 48 48"
+            fill="currentColor"
+            x="128"
+            y="128"
+            role="img"
+            style={{
+              display: "inline-block",
+              verticalAlign: "middle",
+              padding: "2px",
+            }}
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <circle cx="24" cy="24" r="20" fill="#2979ff"></circle>
-            <circle cx="24" cy="19" r="4" fill="#2962ff"></circle>
-            <path
-              fill="#2962ff"
-              d="M24,26c0,0-9,0-9,5.727C15,35,16.636,35,24,35s9,0,9-3.273C33,26,24,26,24,26z"
-            ></path>
-            <circle cx="24" cy="18" r="4" fill="#fff"></circle>
-            <path
-              fill="#fff"
-              d="M24,25c0,0-9,0-9,5.727C15,34,16.636,34,24,34s9,0,9-3.273C33,25,24,25,24,25z"
-            ></path>
+            <g fill="currentColor">
+              <path
+                fill="#009688"
+                d="m39.2 8.4l-1.8 1.8c-6.3 6.5-5.4 22 0 27.6l1.8 1.8c.5.5 1.3.5 1.8 0l3.6-3.7c.5-.5.5-1.3 0-1.8l-3.4-3.4h-4.8c-1.3-1.3-1.3-12.1 0-13.4h4.8l3.3-3.4c.5-.5.5-1.3 0-1.8L41 8.4c-.5-.5-1.3-.5-1.8 0zm-28 0l-1.8 1.8c-6.3 6.5-5.4 22 0 27.6l1.8 1.8c.5.5 1.3.5 1.8 0l3.6-3.7c.5-.5.5-1.3 0-1.8l-3.4-3.4H8.5c-1.3-1.3-1.3-12.1 0-13.4h4.8l3.3-3.4c.5-.5.5-1.3 0-1.8L13 8.4c-.5-.5-1.3-.5-1.8 0z"
+              />
+              <g fill="#2196F3">
+                <path d="m25.3 18.6l5.4 5.4l-5.4 5.4z" />
+                <path d="M16 22h11v4H16z" />
+              </g>
+            </g>
           </svg>
         </div>
         <div className="soundline-node-label">Go To Extension</div>
@@ -91,13 +98,15 @@ const GoToExtension = (props: any) => {
         id="target"
         isConnectable={props.isConnectable}
       />
-      <Handle
-        className="soundline-handle"
-        type="source"
-        position={Position.Bottom}
-        id="source"
-        isConnectable={props.isConnectable}
-      />
+      {!currentPath.includes("/menu/") && (
+        <Handle
+          className="soundline-handle"
+          type="source"
+          position={Position.Bottom}
+          id="source"
+          isConnectable={props.isConnectable}
+        />
+      )}
     </div>
   );
 };

@@ -412,6 +412,7 @@ const addNewNode = (data: any, nodes: any, type: any = null) => {
           position: { x: 120, y: 250 },
           data: {
             voicemailBox: node[1],
+            type: node[0],
           },
         },
         conditional: command[0],

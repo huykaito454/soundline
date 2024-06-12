@@ -108,6 +108,15 @@
     border: 1px solid #eee;
     cursor: pointer;
   }
+  .edge-label-default {
+    background-color: #f7f7f7;
+    font-size: 12px;
+    padding: 1rem;
+    font-weight: 500;
+    border-radius: 100rem;
+    border: 1px solid #eee;
+    cursor: pointer;
+  }
 }
 .ant-form-item {
   margin-bottom: 0 !important;

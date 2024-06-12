@@ -7,6 +7,7 @@ import {
   onChangeNode,
 } from "../../../../utils/common";
 const Playback = (props: any) => {
+  const currentPath = location.pathname;
   const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
   const onChange = (evt: any) => {
@@ -87,13 +88,15 @@ const Playback = (props: any) => {
         id="target"
         isConnectable={props.isConnectable}
       />
-      <Handle
-        className="soundline-handle"
-        type="source"
-        position={Position.Bottom}
-        id="source"
-        isConnectable={props.isConnectable}
-      />
+      {!currentPath.includes("/menu/") && (
+        <Handle
+          className="soundline-handle"
+          type="source"
+          position={Position.Bottom}
+          id="source"
+          isConnectable={props.isConnectable}
+        />
+      )}
     </div>
   );
 };
