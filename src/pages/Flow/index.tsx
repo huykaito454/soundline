@@ -168,10 +168,23 @@ const Flow = () => {
     },
     [reactFlowInstance]
   );
+  const handleNodes = (node: any) => {
+    if (currentPath.includes("/phone-number/")) {
+      let flow: any = [];
+      let data = customerNumbers;
+      let dataFined = data.find((x: any) => x.id == id);
+      if (dataFined) {
+        dataFined["conditionalName"] = node;
+        flow = returnPhoneNumberFlow(dataFined);
+        setNodes(flow.nodes);
+        setEdges(flow.edges);
+      }
+    }
+  };
   return (
     <div className="w-full h-[100vh]" ref={ref}>
       <ReactFlowProvider>
-        <Header nodes={nodes} edges={edges}></Header>
+        <Header nodes={nodes} edges={edges} onClick={handleNodes}></Header>
         <div
           className="flex h-[100vh]"
           style={{ height: "calc(100vh - 60px)" }}
