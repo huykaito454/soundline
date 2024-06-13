@@ -5,7 +5,9 @@ import {
   BaseEdge,
   EdgeLabelRenderer,
   EdgeProps,
-  getBezierPath,
+  MarkerType,
+  getMarkerEnd,
+  getSmoothStepPath,
   useReactFlow,
 } from "reactflow";
 
@@ -20,7 +22,7 @@ const DefaultEdge = ({
   style = {},
   markerEnd,
 }: EdgeProps) => {
-  const [edgePath, labelX, labelY] = getBezierPath({
+  const [edgePath, labelX, labelY] = getSmoothStepPath({
     sourceX,
     sourceY,
     sourcePosition,
@@ -48,6 +50,7 @@ const DefaultEdge = ({
     ...style,
     stroke: "#1677ff",
   };
+
   return (
     <g onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <BaseEdge path={edgePath} markerEnd={markerEnd} style={customStyle} />

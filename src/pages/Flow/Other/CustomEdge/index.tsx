@@ -4,7 +4,7 @@ import {
   BaseEdge,
   EdgeLabelRenderer,
   EdgeProps,
-  getBezierPath,
+  getSmoothStepPath,
   useReactFlow,
 } from "reactflow";
 import ConditionTypeModal from "../ConditionTypeModal";
@@ -24,7 +24,7 @@ const CustomEdge = ({
   data,
 }: EdgeProps) => {
   const condition = conditionsData.find((item) => item.type === data.condition);
-  const [edgePath, labelX, labelY] = getBezierPath({
+  const [edgePath, labelX, labelY] = getSmoothStepPath({
     sourceX,
     sourceY,
     sourcePosition,

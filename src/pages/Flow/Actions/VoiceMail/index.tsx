@@ -58,11 +58,7 @@ const VoiceMail = (props: any) => {
         <div className="soundline-node-item">
           <label className="label">Type</label>
           <Form.Item name="type">
-            <Radio.Group
-              defaultValue="v"
-              buttonStyle="solid"
-              className="nodrag"
-            >
+            <Radio.Group buttonStyle="solid" className="nodrag">
               <Radio.Button value="v">Default</Radio.Button>
               <Radio.Button value="va">Admin</Radio.Button>
               <Radio.Button value="vb">Busy</Radio.Button>

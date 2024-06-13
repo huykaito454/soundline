@@ -4,7 +4,7 @@ import {
   BaseEdge,
   EdgeLabelRenderer,
   EdgeProps,
-  getBezierPath,
+  getSmoothStepPath,
   useReactFlow,
 } from "reactflow";
 import ConditionTypeModal from "../ConditionTypeModal";
@@ -22,7 +22,7 @@ const MenuEdge = ({
   markerEnd,
   data,
 }: EdgeProps) => {
-  const [edgePath, labelX, labelY] = getBezierPath({
+  const [edgePath, labelX, labelY] = getSmoothStepPath({
     sourceX,
     sourceY,
     sourcePosition,

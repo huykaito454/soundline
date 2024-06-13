@@ -193,7 +193,7 @@ const Flow = () => {
           className="flex h-[100vh]"
           style={{ height: "calc(100vh - 60px)" }}
         >
-          <div className="w-[220px] shadow">
+          <div className="w-[220px] shadow overflow-y-scroll sidebar-custom">
             <Sidebar></Sidebar>
           </div>
           <div className="flex-1 h-full" ref={reactFlowWrapper}>
