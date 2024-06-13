@@ -66,7 +66,7 @@ const DefaultEdge = ({
             className="nodrag nopan"
           >
             <Button
-              className="button-delete"
+              className="button-delete border-1"
               shape="circle"
               title="Delete"
               onClick={handleDelete}

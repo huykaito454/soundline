@@ -1,12 +1,12 @@
 import { CopyOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input } from "antd";
 import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
 import {
   deleteNode,
   duplicateNode,
   onChangeNode,
 } from "../../../../utils/common";
-const StartRecord = (props: any) => {
+const SetCallerIDNumber = (props: any) => {
   const currentPath = location.pathname;
   const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
@@ -27,8 +27,8 @@ const StartRecord = (props: any) => {
           <svg
             width="25px"
             height="25px"
-            viewBox="0 0 32 32"
-            fill="#E8403E"
+            viewBox="0 0 24 24"
+            fill="#28AE9B"
             x="128"
             y="128"
             role="img"
@@ -39,18 +39,15 @@ const StartRecord = (props: any) => {
             }}
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g fill="#E8403E">
-              <g fill="none">
-                <path
-                  fill="#E8403E"
-                  d="M2 6a4 4 0 0 1 4-4h20a4 4 0 0 1 4 4v20a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V6Z"
-                />
-                <path fill="#fff" d="M24 16a8 8 0 1 1-16 0a8 8 0 0 1 16 0Z" />
-              </g>
+            <g fill="#28AE9B">
+              <path
+                fill="#28AE9B"
+                d="M22 3H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2M8 6a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m6 12H2v-1c0-2 4-3.1 6-3.1s6 1.1 6 3.1v1m3.85-4h1.65l1.5 2l-2 2c-1.3-1-2.27-2.39-2.72-4c-.18-.64-.28-1.31-.28-2s.1-1.36.28-2c.45-1.62 1.42-3 2.72-4l2 2l-1.5 2h-1.65c-.22.63-.35 1.3-.35 2s.13 1.37.35 2Z"
+              />
             </g>
           </svg>
         </div>
-        <div className="soundline-node-label">Start Record</div>
+        <div className="soundline-node-label">Set Caller ID Number</div>
       </div>
       <Form
         form={form}
@@ -59,9 +56,14 @@ const StartRecord = (props: any) => {
         initialValues={props.data}
       >
         <div className="soundline-node-item">
-          <label className="label">Name</label>
-          <Form.Item name="name">
-            <Input className="nodrag" placeholder="Name" />
+          <label className="label">Number</label>
+          <Form.Item name="number">
+            <Input className="nodrag" placeholder="Number" />
+          </Form.Item>
+        </div>
+        <div className="soundline-node-item">
+          <Form.Item name="isCell" valuePropName="checked">
+            <Checkbox className="nodrag">For cell phone forwarding</Checkbox>
           </Form.Item>
         </div>
       </Form>
@@ -106,4 +108,4 @@ const StartRecord = (props: any) => {
   );
 };
 
-export default StartRecord;
+export default SetCallerIDNumber;

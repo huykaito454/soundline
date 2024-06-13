@@ -55,7 +55,7 @@
     gap: 0.1rem;
   }
   .soundline-tool {
-    @apply flex gap-1 bg-white rounded-lg py-1 px-2 border;
+    @apply flex gap-1 bg-white rounded-lg p-1 border;
   }
   .label {
     color: rgba(28, 31, 35, 0.35);

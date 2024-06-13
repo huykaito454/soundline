@@ -25,12 +25,6 @@ import Menu from "./MainActions/Menu";
 import MenuEdge from "./Other/MenuEdge";
 import GoToMenu from "./Actions/GoToMenu";
 import { useLocation, useParams } from "react-router-dom";
-import {
-  conditionalData,
-  departmentData,
-  menuData,
-  phoneNumberData,
-} from "../../data";
 import StartRecord from "./Actions/StartRecord";
 import VoiceMail from "./Actions/VoiceMail";
 import Playback from "./Actions/Playback";
@@ -43,6 +37,7 @@ import {
 } from "../../utils/common";
 import { conditional, customerNumbers, department, menu } from "../../mockData";
 import DefaultEdge from "./Other/DefaultEdge";
+import SetCallerIDNumber from "./Actions/SetCallerIDNumber";
 
 const nodeTypes = {
   phoneNumber: PhoneNumber,
@@ -56,6 +51,7 @@ const nodeTypes = {
   voiceMail: VoiceMail,
   playback: Playback,
   goToExtension: GoToExtension,
+  setCallerIDNumber: SetCallerIDNumber,
 };
 const edgeTypes = {
   custom: CustomEdge,

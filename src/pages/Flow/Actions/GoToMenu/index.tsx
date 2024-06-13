@@ -91,16 +91,18 @@ const GoToMenu = (props: any) => {
         isVisible={props.data.toolbarVisible}
         position={props.data.toolbarPosition}
         align="end"
-        className="flex gap-1"
+        className="soundline-tool"
       >
         <Button
           size="small"
+          type="text"
           title="Duplicate"
           icon={<CopyOutlined />}
           onClick={handleDuplicate}
         ></Button>
         <Button
           size="small"
+          type="text"
           title="Delete"
           icon={<DeleteOutlined />}
           onClick={handleDelete}
