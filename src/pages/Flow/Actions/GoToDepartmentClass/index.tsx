@@ -1,12 +1,12 @@
 import { CopyOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Radio } from "antd";
+import { Button, Form, Input } from "antd";
 import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
 import {
   deleteNode,
   duplicateNode,
   onChangeNode,
 } from "../../../../utils/common";
-const Playback = (props: any) => {
+const GoToDepartmentClass = (props: any) => {
   const currentPath = location.pathname;
   const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
@@ -27,8 +27,8 @@ const Playback = (props: any) => {
           <svg
             width="25px"
             height="25px"
-            viewBox="0 0 32 32"
-            fill="currentColor"
+            viewBox="0 0 24 24"
+            fill="#d466ea"
             x="128"
             y="128"
             role="img"
@@ -39,15 +39,18 @@ const Playback = (props: any) => {
             }}
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g fill="currentColor">
-              <path
-                fill="#00007f"
-                d="M17.229 4a.9.9 0 0 0-.569.232l-7.6 6.32a1.158 1.158 0 0 1-.955.328H3.208A1.2 1.2 0 0 0 2 12.088v7.826a1.2 1.2 0 0 0 1.208 1.206H8.1a1.158 1.158 0 0 1 .955.328l7.6 6.32c.521.433 1.081.224 1.081-.289V4.522A.494.494 0 0 0 17.229 4ZM27 6.3l-1.791 1.793a14.708 14.708 0 0 1 0 15.844l1.785 1.776A17.19 17.19 0 0 0 27 6.3Zm-4.333 4.323L20.905 12.4a6.035 6.035 0 0 1 0 7.237l1.756 1.756a8.554 8.554 0 0 0 .01-10.769Z"
-              />
+            <g fill="#d466ea">
+              <g fill="none">
+                <path d="M24 0v24H0V0h24ZM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01l-.184-.092Z" />
+                <path
+                  fill="#d466ea"
+                  d="M12 3a3 3 0 0 0-1 5.83V11H8a3 3 0 0 0-3 3v1.17a3.001 3.001 0 1 0 2 0V14a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v1.17a3.001 3.001 0 1 0 2 0V14a3 3 0 0 0-3-3h-3V8.83A3.001 3.001 0 0 0 12 3Z"
+                />
+              </g>
             </g>
           </svg>
         </div>
-        <div className="soundline-node-label">Playback</div>
+        <div className="soundline-node-label">Go To Department Class</div>
       </div>
       <Form
         form={form}
@@ -56,18 +59,9 @@ const Playback = (props: any) => {
         initialValues={props.data}
       >
         <div className="soundline-node-item">
-          <label className="label">Type</label>
-          <Form.Item name="type">
-            <Radio.Group buttonStyle="solid" className="nodrag">
-              <Radio.Button value="p">Default</Radio.Button>
-              <Radio.Button value="ps">System</Radio.Button>
-            </Radio.Group>
-          </Form.Item>
-        </div>
-        <div className="soundline-node-item">
-          <label className="label">File Name</label>
-          <Form.Item name="name">
-            <Input className="nodrag" placeholder="File Name" />
+          <label className="label">Additional</label>
+          <Form.Item name="additional">
+            <Input className="nodrag" placeholder="Additional" />
           </Form.Item>
         </div>
       </Form>
@@ -112,4 +106,4 @@ const Playback = (props: any) => {
   );
 };
 
-export default Playback;
+export default GoToDepartmentClass;

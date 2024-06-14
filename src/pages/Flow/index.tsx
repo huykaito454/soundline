@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ReactFlow, {
-  Controls,
   Background,
   applyEdgeChanges,
   applyNodeChanges,
@@ -38,6 +37,32 @@ import {
 import { conditional, customerNumbers, department, menu } from "../../mockData";
 import DefaultEdge from "./Other/DefaultEdge";
 import SetCallerIDNumber from "./Actions/SetCallerIDNumber";
+import SetCallerIDPostfix from "./Actions/SetCallerIDPostfix";
+import SetCallerIDPrefix from "./Actions/SetCallerIDPrefix";
+import SetClassName from "./Actions/SetClassName";
+import SetBLF from "./Actions/SetBLF";
+import SetLanguage from "./Actions/SetLanguage";
+import SetRingtone from "./Actions/SetRingtone";
+import Answer from "./Actions/Answer";
+import Busy from "./Actions/Busy";
+import CallbackExtension from "./Actions/CallbackExtension";
+import Link from "./Actions/Link";
+import DatabaseForward from "./Actions/DatabaseForward";
+import Directory from "./Actions/Directory";
+import ForwardNumber from "./Actions/ForwardNumber";
+import GoToDepartmentClass from "./Actions/GoToDepartmentClass";
+import GoToQueue from "./Actions/GoToQueue";
+import Hangup from "./Actions/Hangup";
+import MenuRecord from "./Actions/MenuRecord";
+import NameScreenRecord from "./Actions/NameScreenRecord";
+import Privacy from "./Actions/Privacy";
+import RepeatMenu from "./Actions/RepeatMenu";
+import ReturnToPreviousMenu from "./Actions/ReturnToPreviousMenu";
+import Zapateller from "./Actions/Zapateller";
+import Wait from "./Actions/Wait";
+import Trunk from "./Actions/Trunk";
+import RingGroup from "./Actions/RingGroup";
+import { CustomControls } from "./Other/CustomControls";
 
 const nodeTypes = {
   phoneNumber: PhoneNumber,
@@ -52,6 +77,31 @@ const nodeTypes = {
   playback: Playback,
   goToExtension: GoToExtension,
   setCallerIDNumber: SetCallerIDNumber,
+  setCallerIDPostfix: SetCallerIDPostfix,
+  setCallerIDPrefix: SetCallerIDPrefix,
+  class: SetClassName,
+  blf: SetBLF,
+  language: SetLanguage,
+  ringtone: SetRingtone,
+  answer: Answer,
+  busy: Busy,
+  callback: CallbackExtension,
+  link: Link,
+  databaseForward: DatabaseForward,
+  directory: Directory,
+  forward: ForwardNumber,
+  goToDepartmentClass: GoToDepartmentClass,
+  goToQueue: GoToQueue,
+  hangup: Hangup,
+  menuRecord: MenuRecord,
+  nameScreenRecord: NameScreenRecord,
+  privacy: Privacy,
+  repeatMenu: RepeatMenu,
+  returnToPreviousMenu: ReturnToPreviousMenu,
+  zap: Zapateller,
+  wait: Wait,
+  trunk: Trunk,
+  ringGroup: RingGroup,
 };
 const edgeTypes = {
   custom: CustomEdge,
@@ -204,10 +254,9 @@ const Flow = () => {
               onDragOver={onDragOver}
               nodeTypes={nodeTypes}
               edgeTypes={edgeTypes}
-              defaultViewport={{ x: 0, y: 0, zoom: 0.9 }}
             >
               <Background />
-              <Controls />
+              <CustomControls />
               <MiniMap nodeStrokeWidth={3} pannable={true} zoomable={true} />
             </ReactFlow>
           </div>

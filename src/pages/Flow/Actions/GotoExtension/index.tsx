@@ -1,5 +1,5 @@
 import { CopyOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Radio } from "antd";
 import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
 import {
   deleteNode,
@@ -59,6 +59,16 @@ const GoToExtension = (props: any) => {
         onValuesChange={onChange}
         initialValues={props.data}
       >
+        <div className="soundline-node-item">
+          <label className="label">Type</label>
+          <Form.Item name="type">
+            <Radio.Group buttonStyle="solid" className="nodrag">
+              <Radio.Button value="e">Default</Radio.Button>
+              <Radio.Button value="eg">In ext.conf</Radio.Button>
+              <Radio.Button value="egs">In sip-ext.conf </Radio.Button>
+            </Radio.Group>
+          </Form.Item>
+        </div>
         <div className="soundline-node-item">
           <label className="label">Number</label>
           <Form.Item name="number">

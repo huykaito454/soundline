@@ -1,12 +1,12 @@
 import { CopyOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Radio } from "antd";
+import { Button, Checkbox, Form, Input, Radio } from "antd";
 import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
 import {
   deleteNode,
   duplicateNode,
   onChangeNode,
 } from "../../../../utils/common";
-const Playback = (props: any) => {
+const SetCallerIDPrefix = (props: any) => {
   const currentPath = location.pathname;
   const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
@@ -27,8 +27,8 @@ const Playback = (props: any) => {
           <svg
             width="25px"
             height="25px"
-            viewBox="0 0 32 32"
-            fill="currentColor"
+            viewBox="0 0 1024 1024"
+            fill="#3A76F5"
             x="128"
             y="128"
             role="img"
@@ -39,15 +39,15 @@ const Playback = (props: any) => {
             }}
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g fill="currentColor">
+            <g fill="#3A76F5">
               <path
-                fill="#00007f"
-                d="M17.229 4a.9.9 0 0 0-.569.232l-7.6 6.32a1.158 1.158 0 0 1-.955.328H3.208A1.2 1.2 0 0 0 2 12.088v7.826a1.2 1.2 0 0 0 1.208 1.206H8.1a1.158 1.158 0 0 1 .955.328l7.6 6.32c.521.433 1.081.224 1.081-.289V4.522A.494.494 0 0 0 17.229 4ZM27 6.3l-1.791 1.793a14.708 14.708 0 0 1 0 15.844l1.785 1.776A17.19 17.19 0 0 0 27 6.3Zm-4.333 4.323L20.905 12.4a6.035 6.035 0 0 1 0 7.237l1.756 1.756a8.554 8.554 0 0 0 .01-10.769Z"
+                fill="#3A76F5"
+                d="m938 458.8l-29.6-312.6c-1.5-16.2-14.4-29-30.6-30.6L565.2 86h-.4c-3.2 0-5.7 1-7.6 2.9L88.9 557.2a9.96 9.96 0 0 0 0 14.1l363.8 363.8c1.9 1.9 4.4 2.9 7.1 2.9s5.2-1 7.1-2.9l468.3-468.3c2-2.1 3-5 2.8-8zM699 387c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z"
               />
             </g>
           </svg>
         </div>
-        <div className="soundline-node-label">Playback</div>
+        <div className="soundline-node-label">Set Caller ID Prefix</div>
       </div>
       <Form
         form={form}
@@ -59,15 +59,30 @@ const Playback = (props: any) => {
           <label className="label">Type</label>
           <Form.Item name="type">
             <Radio.Group buttonStyle="solid" className="nodrag">
-              <Radio.Button value="p">Default</Radio.Button>
-              <Radio.Button value="ps">System</Radio.Button>
+              <Radio.Button value="number">Number</Radio.Button>
+              <Radio.Button value="name">Name</Radio.Button>
             </Radio.Group>
           </Form.Item>
         </div>
+        {props.data.type == "number" ? (
+          <div className="soundline-node-item">
+            <label className="label">Number</label>
+            <Form.Item name="number">
+              <Input type="number" className="nodrag" placeholder="Number" />
+            </Form.Item>
+          </div>
+        ) : (
+          <div className="soundline-node-item">
+            <label className="label">Name</label>
+            <Form.Item name="name">
+              <Input className="nodrag" placeholder="Name" />
+            </Form.Item>
+          </div>
+        )}
+
         <div className="soundline-node-item">
-          <label className="label">File Name</label>
-          <Form.Item name="name">
-            <Input className="nodrag" placeholder="File Name" />
+          <Form.Item name="isCell" valuePropName="checked">
+            <Checkbox className="nodrag">For cell phone forwarding</Checkbox>
           </Form.Item>
         </div>
       </Form>
@@ -112,4 +127,4 @@ const Playback = (props: any) => {
   );
 };
 
-export default Playback;
+export default SetCallerIDPrefix;

@@ -9,6 +9,7 @@
   .soundline-node {
     min-height: 50px;
     min-width: 300px;
+    max-width: 420px;
     border: 1px solid #eee;
     padding: 10px;
     border-radius: 10px;
@@ -72,7 +73,10 @@
     height: 10px;
     transition: 0.1s linear;
   }
-
+  .soundline-description {
+    color: gray;
+    font-size: 14px;
+  }
   .menu-item {
     @apply flex items-center p-2 gap-3 bg-white border rounded-lg cursor-grab font-medium transition-all;
     font-size: 13px;
@@ -137,7 +141,23 @@ path.react-flow__edge-path {
   display: none;
 }
 .ant-collapse {
-  border-top: none;
+  border-radius: 0;
   border-left: none;
   border-right: none;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+.hidden-outline {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
 }

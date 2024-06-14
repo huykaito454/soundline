@@ -67,9 +67,9 @@ const Menu = (props: any) => {
           </Form.Item>
         </div>
         <div className="soundline-node-item">
-          <label className="label">Timeout</label>
+          <label className="label">Timeout (s)</label>
           <Form.Item name="timeout">
-            <Input className="nodrag" placeholder="Timeout" />
+            <Input className="nodrag" placeholder="Timeout (s)" />
           </Form.Item>
         </div>
         <div className="soundline-node-item">

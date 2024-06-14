@@ -1,19 +1,10 @@
 import { CopyOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Radio } from "antd";
+import { Button } from "antd";
 import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
-import {
-  deleteNode,
-  duplicateNode,
-  onChangeNode,
-} from "../../../../utils/common";
-const Playback = (props: any) => {
+import { deleteNode, duplicateNode } from "../../../../utils/common";
+const RepeatMenu = (props: any) => {
   const currentPath = location.pathname;
-  const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
-  const onChange = (evt: any) => {
-    const allFields = form.getFieldsValue();
-    onChangeNode(setNodes, props, allFields);
-  };
   const handleDuplicate = () => {
     duplicateNode(setNodes, props);
   };
@@ -21,14 +12,14 @@ const Playback = (props: any) => {
     deleteNode(setNodes, setEdges, props);
   };
   return (
-    <div className="soundline-node">
+    <div className="soundline-node w-[300px]">
       <div className="soundline-node-name">
         <div className="logo">
           <svg
             width="25px"
             height="25px"
-            viewBox="0 0 32 32"
-            fill="currentColor"
+            viewBox="0 0 24 24"
+            fill="#3A76F5"
             x="128"
             y="128"
             role="img"
@@ -39,38 +30,19 @@ const Playback = (props: any) => {
             }}
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g fill="currentColor">
+            <g fill="#3A76F5">
               <path
-                fill="#00007f"
-                d="M17.229 4a.9.9 0 0 0-.569.232l-7.6 6.32a1.158 1.158 0 0 1-.955.328H3.208A1.2 1.2 0 0 0 2 12.088v7.826a1.2 1.2 0 0 0 1.208 1.206H8.1a1.158 1.158 0 0 1 .955.328l7.6 6.32c.521.433 1.081.224 1.081-.289V4.522A.494.494 0 0 0 17.229 4ZM27 6.3l-1.791 1.793a14.708 14.708 0 0 1 0 15.844l1.785 1.776A17.19 17.19 0 0 0 27 6.3Zm-4.333 4.323L20.905 12.4a6.035 6.035 0 0 1 0 7.237l1.756 1.756a8.554 8.554 0 0 0 .01-10.769Z"
+                fill="#3A76F5"
+                d="M17 17v-3q0-.425.288-.713T18 13q.425 0 .713.275t.287.7V18q0 .425-.288.713T18 19H6.85l.825.825q.3.3.313.725t-.288.725q-.3.3-.713.3T6.3 21.3l-2.6-2.6q-.275-.275-.275-.7t.275-.7l2.575-2.575q.3-.3.713-.3t.712.3q.3.3.3.713t-.3.712l-.85.85H17ZM7 7v3q0 .425-.288.713T6 11q-.425 0-.713-.275t-.287-.7V6q0-.425.288-.713T6 5h11.15l-.825-.825q-.3-.3-.313-.725t.288-.725q.3-.3.713-.3t.687.275l2.6 2.6q.275.275.275.7t-.275.7l-2.575 2.575q-.3.3-.713.3t-.712-.3q-.3-.3-.3-.713t.3-.712l.85-.85H7Z"
               />
             </g>
           </svg>
         </div>
-        <div className="soundline-node-label">Playback</div>
+        <div className="soundline-node-label">Repeat Menu</div>
       </div>
-      <Form
-        form={form}
-        className="soundline-node-content"
-        onValuesChange={onChange}
-        initialValues={props.data}
-      >
-        <div className="soundline-node-item">
-          <label className="label">Type</label>
-          <Form.Item name="type">
-            <Radio.Group buttonStyle="solid" className="nodrag">
-              <Radio.Button value="p">Default</Radio.Button>
-              <Radio.Button value="ps">System</Radio.Button>
-            </Radio.Group>
-          </Form.Item>
-        </div>
-        <div className="soundline-node-item">
-          <label className="label">File Name</label>
-          <Form.Item name="name">
-            <Input className="nodrag" placeholder="File Name" />
-          </Form.Item>
-        </div>
-      </Form>
+      <div className="soundline-description">
+        This allows the caller to repeat the current menu to listen to it again.
+      </div>
       <NodeToolbar
         isVisible={props.data.toolbarVisible}
         position={props.data.toolbarPosition}
@@ -112,4 +84,4 @@ const Playback = (props: any) => {
   );
 };
 
-export default Playback;
+export default RepeatMenu;

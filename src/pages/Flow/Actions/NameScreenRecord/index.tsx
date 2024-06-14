@@ -1,12 +1,12 @@
 import { CopyOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Radio } from "antd";
+import { Button, Form, Input } from "antd";
 import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
 import {
   deleteNode,
   duplicateNode,
   onChangeNode,
 } from "../../../../utils/common";
-const Playback = (props: any) => {
+const NameScreenRecord = (props: any) => {
   const currentPath = location.pathname;
   const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
@@ -27,8 +27,8 @@ const Playback = (props: any) => {
           <svg
             width="25px"
             height="25px"
-            viewBox="0 0 32 32"
-            fill="currentColor"
+            viewBox="0 0 24 24"
+            fill="#E8403E"
             x="128"
             y="128"
             role="img"
@@ -39,15 +39,15 @@ const Playback = (props: any) => {
             }}
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g fill="currentColor">
+            <g fill="#E8403E">
               <path
-                fill="#00007f"
-                d="M17.229 4a.9.9 0 0 0-.569.232l-7.6 6.32a1.158 1.158 0 0 1-.955.328H3.208A1.2 1.2 0 0 0 2 12.088v7.826a1.2 1.2 0 0 0 1.208 1.206H8.1a1.158 1.158 0 0 1 .955.328l7.6 6.32c.521.433 1.081.224 1.081-.289V4.522A.494.494 0 0 0 17.229 4ZM27 6.3l-1.791 1.793a14.708 14.708 0 0 1 0 15.844l1.785 1.776A17.19 17.19 0 0 0 27 6.3Zm-4.333 4.323L20.905 12.4a6.035 6.035 0 0 1 0 7.237l1.756 1.756a8.554 8.554 0 0 0 .01-10.769Z"
+                fill="#E4AB00"
+                d="M19.125 15.125q-.275-.275-.288-.7t.263-.775q.775-.95 1.212-2.138T20.75 9q0-1.3-.438-2.475T19.1 4.4q-.275-.35-.275-.775t.3-.725q.35-.35.838-.35t.787.35q1.05 1.275 1.65 2.825T23 9q0 1.725-.6 3.275T20.75 15.1q-.3.35-.787.363t-.838-.338ZM15.9 11.9q-.275-.275-.313-.713t.213-.862q.175-.3.263-.637T16.15 9q0-.35-.087-.688t-.263-.637q-.25-.425-.213-.862T15.9 6.1q.35-.35.85-.337t.775.387q.425.625.675 1.338T18.45 9q0 .8-.25 1.513t-.675 1.337q-.275.375-.775.388t-.85-.338ZM9 13q-1.65 0-2.825-1.175T5 9q0-1.65 1.175-2.825T9 5q1.65 0 2.825 1.175T13 9q0 1.65-1.175 2.825T9 13Zm-7 8q-.425 0-.713-.288T1 20v-1.8q0-.825.425-1.55t1.175-1.1q1.275-.65 2.875-1.1T9 14q1.925 0 3.525.45t2.875 1.1q.75.375 1.175 1.1T17 18.2V20q0 .425-.288.713T16 21H2Z"
               />
             </g>
           </svg>
         </div>
-        <div className="soundline-node-label">Playback</div>
+        <div className="soundline-node-label">Name Screen Record</div>
       </div>
       <Form
         form={form}
@@ -56,18 +56,9 @@ const Playback = (props: any) => {
         initialValues={props.data}
       >
         <div className="soundline-node-item">
-          <label className="label">Type</label>
-          <Form.Item name="type">
-            <Radio.Group buttonStyle="solid" className="nodrag">
-              <Radio.Button value="p">Default</Radio.Button>
-              <Radio.Button value="ps">System</Radio.Button>
-            </Radio.Group>
-          </Form.Item>
-        </div>
-        <div className="soundline-node-item">
-          <label className="label">File Name</label>
-          <Form.Item name="name">
-            <Input className="nodrag" placeholder="File Name" />
+          <label className="label">Param</label>
+          <Form.Item name="param">
+            <Input className="nodrag" placeholder="Param" />
           </Form.Item>
         </div>
       </Form>
@@ -112,4 +103,4 @@ const Playback = (props: any) => {
   );
 };
 
-export default Playback;
+export default NameScreenRecord;

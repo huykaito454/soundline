@@ -1,12 +1,12 @@
 import { CopyOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Radio } from "antd";
+import { Button, Checkbox, Form, Input } from "antd";
 import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
 import {
   deleteNode,
   duplicateNode,
   onChangeNode,
 } from "../../../../utils/common";
-const Playback = (props: any) => {
+const GoToQueue = (props: any) => {
   const currentPath = location.pathname;
   const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
@@ -27,8 +27,8 @@ const Playback = (props: any) => {
           <svg
             width="25px"
             height="25px"
-            viewBox="0 0 32 32"
-            fill="currentColor"
+            viewBox="0 0 36 36"
+            fill="#8052F6"
             x="128"
             y="128"
             role="img"
@@ -39,15 +39,44 @@ const Playback = (props: any) => {
             }}
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g fill="currentColor">
+            <g fill="#8052F6">
               <path
-                fill="#00007f"
-                d="M17.229 4a.9.9 0 0 0-.569.232l-7.6 6.32a1.158 1.158 0 0 1-.955.328H3.208A1.2 1.2 0 0 0 2 12.088v7.826a1.2 1.2 0 0 0 1.208 1.206H8.1a1.158 1.158 0 0 1 .955.328l7.6 6.32c.521.433 1.081.224 1.081-.289V4.522A.494.494 0 0 0 17.229 4ZM27 6.3l-1.791 1.793a14.708 14.708 0 0 1 0 15.844l1.785 1.776A17.19 17.19 0 0 0 27 6.3Zm-4.333 4.323L20.905 12.4a6.035 6.035 0 0 1 0 7.237l1.756 1.756a8.554 8.554 0 0 0 .01-10.769Z"
+                fill="#8052F6"
+                d="M12 16.14h-.87a8.67 8.67 0 0 0-6.43 2.52l-.24.28v8.28h4.08v-4.7l.55-.62l.25-.29a11 11 0 0 1 4.71-2.86A6.59 6.59 0 0 1 12 16.14Z"
+                className="clr-i-solid clr-i-solid-path-1"
               />
+              <path
+                fill="#8052F6"
+                d="M31.34 18.63a8.67 8.67 0 0 0-6.43-2.52a10.47 10.47 0 0 0-1.09.06a6.59 6.59 0 0 1-2 2.45a10.91 10.91 0 0 1 5 3l.25.28l.54.62v4.71h3.94v-8.32Z"
+                className="clr-i-solid clr-i-solid-path-2"
+              />
+              <path
+                fill="#8052F6"
+                d="M11.1 14.19h.31a6.45 6.45 0 0 1 3.11-6.29a4.09 4.09 0 1 0-3.42 6.33Z"
+                className="clr-i-solid clr-i-solid-path-3"
+              />
+              <path
+                fill="#8052F6"
+                d="M24.43 13.44a6.54 6.54 0 0 1 0 .69a4.09 4.09 0 0 0 .58.05h.19A4.09 4.09 0 1 0 21.47 8a6.53 6.53 0 0 1 2.96 5.44Z"
+                className="clr-i-solid clr-i-solid-path-4"
+              />
+              <circle
+                cx="17.87"
+                cy="13.45"
+                r="4.47"
+                fill="#8052F6"
+                className="clr-i-solid clr-i-solid-path-5"
+              />
+              <path
+                fill="#8052F6"
+                d="M18.11 20.3A9.69 9.69 0 0 0 11 23l-.25.28v6.33a1.57 1.57 0 0 0 1.6 1.54h11.49a1.57 1.57 0 0 0 1.6-1.54V23.3l-.24-.3a9.58 9.58 0 0 0-7.09-2.7Z"
+                className="clr-i-solid clr-i-solid-path-6"
+              />
+              <path fill="none" d="M0 0h36v36H0z" />
             </g>
           </svg>
         </div>
-        <div className="soundline-node-label">Playback</div>
+        <div className="soundline-node-label">Go To Queue</div>
       </div>
       <Form
         form={form}
@@ -56,18 +85,20 @@ const Playback = (props: any) => {
         initialValues={props.data}
       >
         <div className="soundline-node-item">
-          <label className="label">Type</label>
-          <Form.Item name="type">
-            <Radio.Group buttonStyle="solid" className="nodrag">
-              <Radio.Button value="p">Default</Radio.Button>
-              <Radio.Button value="ps">System</Radio.Button>
-            </Radio.Group>
+          <label className="label">Name</label>
+          <Form.Item name="name">
+            <Input className="nodrag" placeholder="Name" />
           </Form.Item>
         </div>
         <div className="soundline-node-item">
-          <label className="label">File Name</label>
-          <Form.Item name="name">
-            <Input className="nodrag" placeholder="File Name" />
+          <label className="label">Timeout (s)</label>
+          <Form.Item name="timeout">
+            <Input type="number" className="nodrag" placeholder="Timeout (s)" />
+          </Form.Item>
+        </div>
+        <div className="soundline-node-item">
+          <Form.Item name="offMusic" valuePropName="checked">
+            <Checkbox className="nodrag">Turn off music on hold</Checkbox>
           </Form.Item>
         </div>
       </Form>
@@ -112,4 +143,4 @@ const Playback = (props: any) => {
   );
 };
 
-export default Playback;
+export default GoToQueue;

@@ -12,6 +12,10 @@ const GoToConditional = (props: any) => {
   const currentPath = location.pathname;
   const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
+  const options = conditional.map((item) => ({
+    ...conditional,
+    value: item.name?.toString(),
+  }));
   const onChange = (evt: any) => {
     const allFields = form.getFieldsValue();
     onChangeNode(setNodes, props, allFields);

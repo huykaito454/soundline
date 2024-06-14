@@ -1,12 +1,12 @@
 import { CopyOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Radio } from "antd";
+import { Button, Checkbox, Form, Input } from "antd";
 import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
 import {
   deleteNode,
   duplicateNode,
   onChangeNode,
 } from "../../../../utils/common";
-const Playback = (props: any) => {
+const Directory = (props: any) => {
   const currentPath = location.pathname;
   const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
@@ -27,8 +27,8 @@ const Playback = (props: any) => {
           <svg
             width="25px"
             height="25px"
-            viewBox="0 0 32 32"
-            fill="currentColor"
+            viewBox="0 0 36 36"
+            fill="#E4AB00"
             x="128"
             y="128"
             role="img"
@@ -39,15 +39,17 @@ const Playback = (props: any) => {
             }}
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g fill="currentColor">
+            <g fill="#E4AB00">
               <path
-                fill="#00007f"
-                d="M17.229 4a.9.9 0 0 0-.569.232l-7.6 6.32a1.158 1.158 0 0 1-.955.328H3.208A1.2 1.2 0 0 0 2 12.088v7.826a1.2 1.2 0 0 0 1.208 1.206H8.1a1.158 1.158 0 0 1 .955.328l7.6 6.32c.521.433 1.081.224 1.081-.289V4.522A.494.494 0 0 0 17.229 4ZM27 6.3l-1.791 1.793a14.708 14.708 0 0 1 0 15.844l1.785 1.776A17.19 17.19 0 0 0 27 6.3Zm-4.333 4.323L20.905 12.4a6.035 6.035 0 0 1 0 7.237l1.756 1.756a8.554 8.554 0 0 0 .01-10.769Z"
+                fill="#E4AB00"
+                d="M30 9H16.42l-2.31-3.18A2 2 0 0 0 12.49 5H6a2 2 0 0 0-2 2v22a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V11a2 2 0 0 0-2-2ZM6 11V7h6.49l2.72 4Z"
+                className="clr-i-solid clr-i-solid-path-1"
               />
+              <path fill="none" d="M0 0h36v36H0z" />
             </g>
           </svg>
         </div>
-        <div className="soundline-node-label">Playback</div>
+        <div className="soundline-node-label">Directory</div>
       </div>
       <Form
         form={form}
@@ -56,18 +58,20 @@ const Playback = (props: any) => {
         initialValues={props.data}
       >
         <div className="soundline-node-item">
-          <label className="label">Type</label>
-          <Form.Item name="type">
-            <Radio.Group buttonStyle="solid" className="nodrag">
-              <Radio.Button value="p">Default</Radio.Button>
-              <Radio.Button value="ps">System</Radio.Button>
-            </Radio.Group>
+          <label className="label">Name</label>
+          <Form.Item name="name">
+            <Input className="nodrag" placeholder="Name" />
           </Form.Item>
         </div>
         <div className="soundline-node-item">
-          <label className="label">File Name</label>
-          <Form.Item name="name">
-            <Input className="nodrag" placeholder="File Name" />
+          <label className="label">Dialplan Context</label>
+          <Form.Item name="dialPlanContext">
+            <Input className="nodrag" placeholder="Dialplan Context" />
+          </Form.Item>
+        </div>
+        <div className="soundline-node-item">
+          <Form.Item name="isExtension" valuePropName="checked">
+            <Checkbox className="nodrag">Don't tell the extension</Checkbox>
           </Form.Item>
         </div>
       </Form>
@@ -112,4 +116,4 @@ const Playback = (props: any) => {
   );
 };
 
-export default Playback;
+export default Directory;

@@ -1,19 +1,10 @@
 import { CopyOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Radio } from "antd";
+import { Button } from "antd";
 import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
-import {
-  deleteNode,
-  duplicateNode,
-  onChangeNode,
-} from "../../../../utils/common";
-const Playback = (props: any) => {
+import { deleteNode, duplicateNode } from "../../../../utils/common";
+const CallbackExtension = (props: any) => {
   const currentPath = location.pathname;
-  const [form] = Form.useForm();
   const { setNodes, setEdges } = useReactFlow();
-  const onChange = (evt: any) => {
-    const allFields = form.getFieldsValue();
-    onChangeNode(setNodes, props, allFields);
-  };
   const handleDuplicate = () => {
     duplicateNode(setNodes, props);
   };
@@ -21,14 +12,14 @@ const Playback = (props: any) => {
     deleteNode(setNodes, setEdges, props);
   };
   return (
-    <div className="soundline-node">
+    <div className="soundline-node w-[300px]">
       <div className="soundline-node-name">
         <div className="logo">
           <svg
             width="25px"
             height="25px"
-            viewBox="0 0 32 32"
-            fill="currentColor"
+            viewBox="0 0 48 48"
+            fill="#3A76F5"
             x="128"
             y="128"
             role="img"
@@ -39,38 +30,23 @@ const Playback = (props: any) => {
             }}
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g fill="currentColor">
+            <g fill="#3A76F5">
               <path
-                fill="#00007f"
-                d="M17.229 4a.9.9 0 0 0-.569.232l-7.6 6.32a1.158 1.158 0 0 1-.955.328H3.208A1.2 1.2 0 0 0 2 12.088v7.826a1.2 1.2 0 0 0 1.208 1.206H8.1a1.158 1.158 0 0 1 .955.328l7.6 6.32c.521.433 1.081.224 1.081-.289V4.522A.494.494 0 0 0 17.229 4ZM27 6.3l-1.791 1.793a14.708 14.708 0 0 1 0 15.844l1.785 1.776A17.19 17.19 0 0 0 27 6.3Zm-4.333 4.323L20.905 12.4a6.035 6.035 0 0 1 0 7.237l1.756 1.756a8.554 8.554 0 0 0 .01-10.769Z"
+                fill="#2196F3"
+                d="M26.4 33.9s4-2.6 4.8-3c.8-.4 1.7-.6 2.2-.2c.8.5 7.5 4.9 8.1 5.3c.6.4.8 1.5.1 2.6c-.8 1.1-4.3 5.5-5.8 5.4c-1.5 0-8.4.4-20.3-11.4C3.6 20.7 4 13.8 4 12.3s4.3-5.1 5.4-5.8c1.1-.8 2.2-.5 2.6.1c.4.6 4.8 7.3 5.3 8.1c.3.5.2 1.4-.2 2.2c-.4.8-3 4.8-3 4.8s.7 2.8 5 7.2c4.4 4.3 7.3 5 7.3 5z"
               />
+              <g fill="#3F51B5">
+                <path d="M35 9H25v4h10c1.1 0 2 .9 2 2v10h4V15c0-3.3-2.7-6-6-6z" />
+                <path d="m28 16l-6.7-5L28 6z" />
+              </g>
             </g>
           </svg>
         </div>
-        <div className="soundline-node-label">Playback</div>
+        <div className="soundline-node-label">Callback Extension</div>
       </div>
-      <Form
-        form={form}
-        className="soundline-node-content"
-        onValuesChange={onChange}
-        initialValues={props.data}
-      >
-        <div className="soundline-node-item">
-          <label className="label">Type</label>
-          <Form.Item name="type">
-            <Radio.Group buttonStyle="solid" className="nodrag">
-              <Radio.Button value="p">Default</Radio.Button>
-              <Radio.Button value="ps">System</Radio.Button>
-            </Radio.Group>
-          </Form.Item>
-        </div>
-        <div className="soundline-node-item">
-          <label className="label">File Name</label>
-          <Form.Item name="name">
-            <Input className="nodrag" placeholder="File Name" />
-          </Form.Item>
-        </div>
-      </Form>
+      <div className="soundline-description">
+        Ring back to the extension that transferred the call. 
+      </div>
       <NodeToolbar
         isVisible={props.data.toolbarVisible}
         position={props.data.toolbarPosition}
@@ -112,4 +88,4 @@ const Playback = (props: any) => {
   );
 };
 
-export default Playback;
+export default CallbackExtension;
