@@ -1,19 +1,18 @@
 import { Button, Space, notification } from "antd";
 import { StarOutlined } from "@ant-design/icons";
 import myImage from "../../assets/images/logo.png";
-import myImage2 from "../../assets/images/SoundLinePortal-logo.png";
 import Input from "antd/es/input/Input";
 import { useState } from "react";
+import { getDataFlow } from "../../utils/exportFinalData";
 const Header = ({ nodes, edges, onClick }: any) => {
   const [rules, setRules] = useState<any>();
   const currentPath = location.pathname;
   const handleClick = () => {
     notification["success"]({
       message: "Notification",
-      description: "Publish the flow successfully!",
+      description: getDataFlow(nodes, edges),
       placement: "bottomRight",
     });
-    console.log(nodes, edges);
   };
   const handleTest = () => {
     onClick(rules);
