@@ -64,22 +64,26 @@ const SetCallerIDPrefix = (props: any) => {
             </Radio.Group>
           </Form.Item>
         </div>
-        {props.data.type == "number" ? (
-          <div className="soundline-node-item">
-            <label className="label">Number</label>
-            <Form.Item name="number">
-              <Input type="number" className="nodrag" placeholder="Number" />
-            </Form.Item>
-          </div>
-        ) : (
-          <div className="soundline-node-item">
-            <label className="label">Name</label>
-            <Form.Item name="name">
-              <Input className="nodrag" placeholder="Name" />
-            </Form.Item>
-          </div>
-        )}
-
+        <div
+          className={`soundline-node-item ${
+            props.data.type == "name" ? "hidden" : ""
+          }`}
+        >
+          <label className="label">Number</label>
+          <Form.Item name="number">
+            <Input type="number" className="nodrag" placeholder="Number" />
+          </Form.Item>
+        </div>
+        <div
+          className={`soundline-node-item ${
+            props.data.type == "number" ? "hidden" : ""
+          }`}
+        >
+          <label className="label">Name</label>
+          <Form.Item name="name">
+            <Input className="nodrag" placeholder="Name" />
+          </Form.Item>
+        </div>
         <div className="soundline-node-item">
           <Form.Item name="isCell" valuePropName="checked">
             <Checkbox className="nodrag">For cell phone forwarding</Checkbox>

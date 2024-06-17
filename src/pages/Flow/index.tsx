@@ -63,6 +63,8 @@ import Wait from "./Actions/Wait";
 import Trunk from "./Actions/Trunk";
 import RingGroup from "./Actions/RingGroup";
 import { CustomControls } from "./Other/CustomControls";
+import { CustomReviewRules } from "./Other/CustomReviewRules";
+import { getDataFlow } from "../../utils/exportFinalData";
 
 const nodeTypes = {
   phoneNumber: PhoneNumber,
@@ -118,7 +120,14 @@ const Flow = () => {
   const [reactFlowInstance, setReactFlowInstance] =
     useState<ReactFlowInstance | null>(null);
   const [nodes, setNodes] = useState<any>([]);
-
+  const [rules, setRules] = useState<any>({
+    source: "",
+    busy: "",
+    close: "",
+    down: "",
+    "menu-source": "",
+  });
+  let timeoutId: any = null;
   useEffect(() => {
     if (ref.current) {
       let flow: any = [];
@@ -144,16 +153,23 @@ const Flow = () => {
       }
       setNodes(flow.nodes);
       setEdges(flow.edges);
+      getDataFlow(nodes, edges, currentPath);
     }
   }, []);
-  const onNodesChange = useCallback(
-    (changes: any) => setNodes((nds: any) => applyNodeChanges(changes, nds)),
-    []
-  );
-  const onEdgesChange = useCallback(
-    (changes: any) => setEdges((eds: any) => applyEdgeChanges(changes, eds)),
-    []
-  );
+  useEffect(() => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      setRules(getDataFlow(nodes, edges, currentPath));
+    }, 500);
+    return () => clearTimeout(timeoutId);
+  }, [nodes, edges, currentPath]);
+  const onNodesChange = useCallback((changes: any) => {
+    setNodes((nds: any) => applyNodeChanges(changes, nds));
+  }, []);
+  const onEdgesChange = useCallback((changes: any) => {
+    setEdges((eds: any) => applyEdgeChanges(changes, eds));
+  }, []);
+
   const onConnect = useCallback((params: any) => {
     if (
       !currentPath.includes("/department/") &&
@@ -218,23 +234,10 @@ const Flow = () => {
     },
     [reactFlowInstance]
   );
-  const handleNodes = (node: any) => {
-    if (currentPath.includes("/phone-number/")) {
-      let flow: any = [];
-      let data = customerNumbers;
-      let dataFined = data.find((x: any) => x.id == id);
-      if (dataFined) {
-        dataFined["conditionalName"] = node;
-        flow = returnPhoneNumberFlow(dataFined);
-        setNodes(flow.nodes);
-        setEdges(flow.edges);
-      }
-    }
-  };
   return (
     <div className="w-full h-[100vh]" ref={ref}>
       <ReactFlowProvider>
-        <Header nodes={nodes} edges={edges} onClick={handleNodes}></Header>
+        <Header nodes={nodes} edges={edges}></Header>
         <div
           className="flex h-[100vh]"
           style={{ height: "calc(100vh - 60px)" }}
@@ -257,6 +260,7 @@ const Flow = () => {
             >
               <Background />
               <CustomControls />
+              <CustomReviewRules rules={rules} />
               <MiniMap nodeStrokeWidth={3} pannable={true} zoomable={true} />
             </ReactFlow>
           </div>

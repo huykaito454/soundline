@@ -20,7 +20,17 @@ const ConditionTypeModal = (props: any) => {
           >
             <div className="soundline-node-item">
               <label className="label-modal">Key Press</label>
-              <Form.Item name="value">
+              <Form.Item
+                name="value"
+                rules={[
+                  {
+                    required: true,
+                    whitespace: true,
+                    message: "Please input your value!",
+                  },
+                ]}
+                validateTrigger={["onBlur", "onChange"]}
+              >
                 <Input placeholder="Key Press" />
               </Form.Item>
             </div>
@@ -49,7 +59,17 @@ const ConditionTypeModal = (props: any) => {
             {data.condition != "1" && (
               <div className="soundline-node-item">
                 <label className="label-modal">Value</label>
-                <Form.Item name="value">
+                <Form.Item
+                  name="value"
+                  rules={[
+                    {
+                      required: true,
+                      whitespace: true,
+                      message: "Please input your value!",
+                    },
+                  ]}
+                  validateTrigger={["onBlur", "onChange"]}
+                >
                   <Input placeholder="Value" />
                 </Form.Item>
               </div>

@@ -1,4 +1,4 @@
-import { Button, Form, Modal } from "antd";
+import { Button, Form, Modal, notification } from "antd";
 import { useState } from "react";
 import {
   BaseEdge,
@@ -38,11 +38,24 @@ const MenuEdge = ({
   };
 
   const handleOk = () => {
-    setIsModalOpen(false);
-    onChangeEdge(setEdges, id, form.getFieldsValue());
-    const allFields = form.getFieldsValue();
-    Object.keys(allFields).forEach((k) => (allFields[k] = allFields[k].trim()));
-    form.setFieldsValue(allFields);
+    form
+      .validateFields({ validateOnly: true })
+      .then(() => {
+        setIsModalOpen(false);
+        onChangeEdge(setEdges, id, form.getFieldsValue());
+        const allFields = form.getFieldsValue();
+        Object.keys(allFields).forEach(
+          (k) => (allFields[k] = allFields[k].trim())
+        );
+        form.setFieldsValue(allFields);
+      })
+      .catch(() => {
+        notification["error"]({
+          message: "Notification",
+          description: "Please input your value!",
+          placement: "bottomRight",
+        });
+      });
   };
 
   const handleCancel = () => {

@@ -90,6 +90,36 @@ const SetBLF = (props: any) => {
             <Input className="nodrag" placeholder="Name" />
           </Form.Item>
         </div>
+        <div
+          className={`soundline-node-item ${
+            props.data.type == "tog" ? "hidden" : ""
+          }`}
+        >
+          <label className="label">Specific Value</label>
+          <Form.Item name="specificValue">
+            <Input className="nodrag" placeholder="Specific Value" />
+          </Form.Item>
+        </div>
+        <div
+          className={`soundline-node-item ${
+            props.data.type != "tog" ? "hidden" : ""
+          }`}
+        >
+          <label className="label">Value When On</label>
+          <Form.Item name="onValue">
+            <Input className="nodrag" placeholder="Value When On" />
+          </Form.Item>
+        </div>
+        <div
+          className={`soundline-node-item ${
+            props.data.type != "tog" ? "hidden" : ""
+          }`}
+        >
+          <label className="label">Value When Off</label>
+          <Form.Item name="offValue">
+            <Input className="nodrag" placeholder="Value When Off" />
+          </Form.Item>
+        </div>
       </Form>
       <NodeToolbar
         isVisible={props.data.toolbarVisible}

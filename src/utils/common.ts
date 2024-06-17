@@ -110,7 +110,6 @@ export const returnMenuFlow = (data: any) => {
       let newNode = addNewNode(command, nodes);
       if (newNode != null) {
         xPosition = xPosition + 350;
-        console.log(xPosition);
         newNode.node.position.y = yPosition;
         newNode.node.position.x = xPosition;
         nodes.push(newNode.node);
@@ -646,14 +645,18 @@ const addNewNode = (data: any, nodes: any, type: any = null) => {
       };
     }
     if (node[0] == "seton" || node[0] == "setoff" || node[0] == "tog") {
+      let nodeData = node[1]?.split(",") || [];
       nodeReturn = {
         node: {
           id: nodes.length.toString(),
           type: "blf",
           position: { x: 120, y: 250 },
           data: {
-            name: node[1],
+            name: nodeData[0] || "",
             type: node[0],
+            specificValue: node[0] != "tog" ? nodeData[1] || "" : "",
+            onValue: node[0] == "tog" ? nodeData[1] || "" : "",
+            offValue: node[0] == "tog" ? nodeData[2] || "" : "",
           },
         },
         conditional: command[0],

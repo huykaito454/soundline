@@ -1,5 +1,5 @@
 import { CopyOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import { AutoComplete, Button, Form, Input } from "antd";
 import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
 import {
   deleteNode,
@@ -10,6 +10,10 @@ import { department } from "../../../../mockData";
 const GoToDepartment = (props: any) => {
   const currentPath = location.pathname;
   const [form] = Form.useForm();
+  const options = department.map((item) => ({
+    ...department,
+    value: item.name?.toString(),
+  }));
   const { setNodes, setEdges } = useReactFlow();
   const onChange = (evt: any) => {
     const allFields = form.getFieldsValue();
@@ -63,7 +67,16 @@ const GoToDepartment = (props: any) => {
           <label className="label">Name</label>
           <div className="flex gap-2 w-full">
             <Form.Item name="name" className="flex-1">
-              <Input className="nodrag" placeholder="Name" />
+              <AutoComplete
+                className="nodrag"
+                options={options}
+                placeholder="Name"
+                filterOption={(inputValue: any, option: any) =>
+                  option!.value
+                    .toUpperCase()
+                    .indexOf(inputValue?.toUpperCase()) !== -1
+                }
+              />
             </Form.Item>
             <Form.Item>
               <Button

@@ -2,7 +2,7 @@ export const customerNumbers = [
   {
     id: 1,
     phoneNumber: 4259475220,
-    conditionalName: "1!/v:700",
+    conditionalName: "1!/seton:salon_nm,closed",
   },
   { id: 2, phoneNumber: 4259475221, conditionalName: "" },
 ];
